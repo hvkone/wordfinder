@@ -129,7 +129,8 @@ HERE we make development plans, dicuss them and pass them. Then we should follow
 
 2/16/2021 - 2/21/2021 TASKS
 
-Sprint 1
+### sprint 1: planning
+
 1. Develop UI in any language 
 2. Obtain Corpus 
 3. Clean the Corpus(Tokenization, lemmatization and stemming)
@@ -137,7 +138,7 @@ Sprint 1
 
 
 
-Sprint 2
+### sprint 2: planning
 
 Discussion list:
 
@@ -192,7 +193,7 @@ unfinished features:
 2. cluster 
 
 
-Sprint #3 planning
+### sprint 3: planning
 - 1 methods to get corpus for many languages
     - 1.1 wikipedia : language abbreviation: https://zh.wikipedia.org/wiki/ISO_639-1
     - 1.2 how to get via wikipedia https://jdhao.github.io/2019/01/10/two_chinese_corpus/
@@ -217,14 +218,32 @@ Sprint #3 planning
 8. alpha version release
 
 
-### sprint #four
+### sprint 4: planning
 
-1. review codes we have pushed to the base github repo @all
-2. with models we had train more languages, train_model. py to database, cluster_model. py to get word2vec model(it doesn't need to store database so everyone can do it)@all
-3. test every py module and welcome to commit bugs we everyone find @all
-4. with logging module add logs before and after important events @all
-5. we should highlight the selected word in each sentence 
-6. we should adjust our cluster algorithms and apply more algorithms to our cluster_model.py. Also, before alpha version we did cluster task only among sentences with the selected word, but actually we shoud do that from the whole corpus of the language corresponding selected word. For example, if we select the word excellent, then find a sentence such as: He was an excellent journalist and a very fine man, after the cluster, we expect to get the sentence like he is a very good man.
- 
+review codes we have pushed to the base github repo @all
+with models we had train more languages, train_model. py to database, cluster_model. py to get word2vec model(it doesn't need to store database so everyone can do it)@all
+test every py module and welcome to commit bugs we everyone find @all
+with logging module add logs before and after important events @all
 Time complexity for this task is a needed issue for us to consider.
-7. Also we need to train more languages. 
+
+1. DATABASE
+  1. 1. create accesible db for everyone
+    1. 1. 1. Will have to change util.py to connect to new db
+  1. 2. check the ouput for application
+  1. 3. Also we need to train more languages.
+  1. 4. Add more text files
+
+2. KWIC
+  2. 1. we should highlight the selected word in each sentence 
+  2. 2. Check the length of words on each side of selected word
+  2. 3. sentence by sentence
+
+3. CLUSTERING
+  3. 1. 
+  3. 2. We should adjust our cluster algorithms and apply more algorithms to our cluster_model.py.
+  3. 3. Cluster after user search word
+    3. 3. 1. For example, if we select the word excellent, then find a sentence such as: He was an excellent journalist and a very fine man, after the cluster, we expect to get the sentence like he is a very good man.
+  3. 5. Also need to set a default k value...
+    3. 5. 1. Elbow Method 
+    3. 5. 2. will try to determine default k based on length of characters in selected 
+  3. 6. Evaluate quality of cluster
