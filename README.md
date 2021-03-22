@@ -229,21 +229,21 @@ Time complexity for this task is a needed issue for us to consider.
 1. DATABASE
     1. create accesible db for everyone
         - Will have to change util.py to connect to new db
-  2. check the ouput for application
-  3. Also we need to train more languages.
-  4. Add more text files
+    2. check the ouput for application
+    3. Also we need to train more languages.
+    4. Add more text files
 
 2. KWIC
-  1. we should highlight the selected word in each sentence 
-  2. Check the length of words on each side of selected word
-  3. sentence by sentence
+    1. we should highlight the selected word in each sentence 
+    2. Check the length of words on each side of selected word
+    3. sentence by sentence
 
 3. CLUSTERING
-  1. 
-  2. We should adjust our cluster algorithms and apply more algorithms to our cluster_model.py.
-  3. Cluster after user search word
-    1. For example, if we select the word excellent, then find a sentence such as: He was an excellent journalist and a very fine man, after the cluster, we expect to get the sentence like he is a very good man.
-  5. Also need to set a default k value...
-    1. Elbow Method 
-    2. will try to determine default k based on length of characters in selected 
-  6. Evaluate quality of cluster
+    1. 
+    2. We should adjust our cluster algorithms and apply more algorithms to our cluster_model.py.
+    3. Cluster after user search word
+        - For example, if we select the word excellent, then find a sentence such as: He was an excellent journalist and a very fine man, after the cluster, we expect to get the sentence like he is a very good man.
+    5. Also need to set a default k value...
+        - Elbow Method 
+        - will try to determine default k based on length of characters in selected 
+    6. Evaluate quality of cluster
