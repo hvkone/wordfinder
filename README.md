@@ -227,8 +227,8 @@ with logging module add logs before and after important events @all
 Time complexity for this task is a needed issue for us to consider.
 
 1. DATABASE
-  1. create accesible db for everyone
-    1. Will have to change util.py to connect to new db
+  1. 1. create accesible db for everyone
+    - Will have to change util.py to connect to new db
   2. check the ouput for application
   3. Also we need to train more languages.
   4. Add more text files
