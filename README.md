@@ -137,7 +137,7 @@ HERE we make development plans, dicuss them and pass them. Then we should follow
 4. Tag the data according the POS
 
 
-
+### -------------------------------------------------
 ### sprint 2: planning
 
 Discussion list:
@@ -153,7 +153,6 @@ Discussion list:
   5  cluster sentences to get example sentences.
 
 ![big task steps](assets/big-task-1.png)
-
 
 
 ### Done list:
@@ -192,7 +191,7 @@ unfinished features:
 1. corpus for many other languages
 2. cluster 
 
-
+### -------------------------------------------------
 ### sprint 3: planning
 - 1 methods to get corpus for many languages
     - 1.1 wikipedia : language abbreviation: https://zh.wikipedia.org/wiki/ISO_639-1
@@ -217,7 +216,7 @@ unfinished features:
 
 8. alpha version release
 
-
+### -------------------------------------------------
 ### sprint 4: planning
 
 review codes we have pushed to the base github repo @all
@@ -239,8 +238,8 @@ Time complexity for this task is a needed issue for us to consider.
     3. sentence by sentence
 
 3. CLUSTERING
-    1. 
-    2. We should adjust our cluster algorithms and apply more algorithms to our cluster_model.py.
+    1. We should adjust our cluster algorithms
+    2. Apply various algorithms to our cluster_model.py.
     3. Cluster after user search word
         - For example, if we select the word excellent, then find a sentence such as: He was an excellent journalist and a very fine man, after the cluster, we expect to get the sentence like he is a very good man.
     5. Also need to set a default k value...
