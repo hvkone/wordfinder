@@ -129,7 +129,7 @@ HERE we make development plans, dicuss them and pass them. Then we should follow
 
 2/16/2021 - 2/21/2021 TASKS
 
-### sprint 1: planning
+# sprint 1: planning
 
 1. Develop UI in any language 
 2. Obtain Corpus 
@@ -138,7 +138,7 @@ HERE we make development plans, dicuss them and pass them. Then we should follow
 
 
 ### -------------------------------------------------
-### sprint 2: planning
+# sprint 2: planning
 
 Discussion list:
 
@@ -167,12 +167,12 @@ Discussion list:
 
 ### mysql
 
-# view all tables of a database, here called mysql database
+### view all tables of a database, here called mysql database
 
 select table_name from information_schema.tables where table_schema='mysql';
 
 
-### sprint 2: review
+# sprint 2: review
 
 new features:
 
@@ -192,7 +192,7 @@ unfinished features:
 2. cluster 
 
 ### -------------------------------------------------
-### sprint 3: planning
+# sprint 3: planning
 - 1 methods to get corpus for many languages
     - 1.1 wikipedia : language abbreviation: https://zh.wikipedia.org/wiki/ISO_639-1
     - 1.2 how to get via wikipedia https://jdhao.github.io/2019/01/10/two_chinese_corpus/
@@ -217,7 +217,7 @@ unfinished features:
 8. alpha version release
 
 ### -------------------------------------------------
-### sprint 4: planning
+# sprint 4: planning
 
 review codes we have pushed to the base github repo @all
 with models we had train more languages, train_model. py to database, cluster_model. py to get word2vec model(it doesn't need to store database so everyone can do it)@all
