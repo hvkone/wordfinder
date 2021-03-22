@@ -216,9 +216,15 @@ Sprint #3 planning
 
 8. alpha version release
 
-9. we can discuss all following or add items following doesn't contains. 
+
+### sprint #four
 
 1. review codes we have pushed to the base github repo @all
 2. with models we had train more languages, train_model. py to database, cluster_model. py to get word2vec model(it doesn't need to store database so everyone can do it)@all
 3. test every py module and welcome to commit bugs we everyone find @all
 4. with logging module add logs before and after important events @all
+5. we should highlight the selected word in each sentence 
+6. we should adjust our cluster algorithms and apply more algorithms to our cluster_model.py. Also, before alpha version we did cluster task only among sentences with the selected word, but actually we shoud do that from the whole corpus of the language corresponding selected word. For example, if we select the word excellent, then find a sentence such as: He was an excellent journalist and a very fine man, after the cluster, we expect to get the sentence like he is a very good man.
+ 
+Time complexity for this task is a needed issue for us to consider.
+7. Also we need to train more languages. 
