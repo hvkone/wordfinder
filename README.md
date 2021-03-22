@@ -222,3 +222,8 @@ Sprint #3 planning
 2. with models we had train more languages, train_model. py to database, cluster_model. py to get word2vec model(it doesn't need to store database so everyone can do it)@all
 3. test every py module and welcome to commit bugs we everyone find @all
 4. with logging module add logs before and after important events @all
+
+# Customer Requirements:
+1. Show the keyword highlighted in the output.
+2. Show all the keywords output in the middle of the page.
+3. Changing the cluster method to show the precise keyword output.
