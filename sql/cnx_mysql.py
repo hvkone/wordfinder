@@ -9,7 +9,7 @@ db_config = {
     'user': 'adminteam@psd-wordfinder',
     'password': 'jFq&T7bPJXmY',
     'client_flags': [mysql.connector.ClientFlag.SSL],
-    'ssl_ca': './sql/DigiCertGlobalRootG2.crt.pem'
+    'ssl_ca': './DigiCertGlobalRootG2.crt.pem'
 }
 
 # Construct connection string
