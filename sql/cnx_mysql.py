@@ -1,5 +1,6 @@
 import mysql.connector
 from mysql.connector import errorcode
+import pymysql
 from mysql.connector.constants import ClientFlag
 
 # Obtain connection string information from the portal
@@ -8,13 +9,14 @@ db_config = {
     'database': 'psd_project',
     'user': 'adminteam@psd-wordfinder',
     'password': 'jFq&T7bPJXmY',
-    'client_flags': [mysql.connector.ClientFlag.SSL],
-    'ssl_ca': './DigiCertGlobalRootG2.crt.pem'
+    #'client_flags': [mysql.connector.ClientFlag.SSL],
+    'ssl_ca': './/src//train//DigiCertGlobalRootG2.crt.pem'
 }
 
 # Construct connection string
 try:
-    conn = mysql.connector.connect(**db_config)
+    #conn = mysql.connector.connect(**db_config)
+    conn = pymysql.connect(**db_config)
     if conn:
         print("Database psd_project was located.")
         
