@@ -99,7 +99,7 @@ class AppService(object):
         """
         cluster sentences to get examples
         :param language_name:
-        :param save_path: the saved path for our cluster model trained well
+        :param save_path: the saved path for our cluster udpipemodel trained well
         :param sentences:
         :param n_clusters:
         :return:
@@ -119,6 +119,7 @@ class AppService(object):
             print('no sentence')
             return
         # first loading model
+        # first loading udpipemodel
         word2vec_model = load_model(save_path)
         # second geting vectors for one sentence
         sent_vectors = []
