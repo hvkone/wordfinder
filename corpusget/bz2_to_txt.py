@@ -28,6 +28,6 @@ def make_corpus(in_f, out_f):
 
 
 if __name__ == '__main__':
-    in_f = '/home/zglg/SLU/psd/corpus/english/enwiki-20210301-pages-articles-multistream11.xml-p6899367p7054859.bz2'
+    in_f = 'corpus/english/enwiki-20210301-pages-articles-multistream11.xml-p6899367p7054859.bz2'
     out_f = 'wiki_en2.txt'
     make_corpus(in_f, out_f)

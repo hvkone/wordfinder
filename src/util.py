@@ -41,7 +41,7 @@ db_config = {
 }
 
 # language and corresponding file path of corpus
-corpus_language = {'Chinese': './/corpus//chinese//zh.txt',
+corpus_language = {'Chinese': './/corpus//chinese//23825-0.txt',
                    'English': './/corpus//english//wiki_en.txt',
                    'French': './/corpus//french//wiki_fr.txt',
                    'Italian': './/corpus//italian//wiki_it.txt',

@@ -18,7 +18,7 @@ def download_wiki(base_url='https://dumps.wikimedia.org/enwiki/'):
     dumps = [a['href'] for a in soup_index.find_all('a') if
              a.has_attr('href')]
     print(dumps)
-    dump_url = base_url + '20210301/'
+    dump_url = base_url + 'latest/'
     # Retrieve the html
     dump_html = requests.get(dump_url).text
     print(dump_html[:50])
@@ -36,7 +36,7 @@ def download_wiki(base_url='https://dumps.wikimedia.org/enwiki/'):
     print(files[:5])
     files_to_download = [file[0] for file in files if '.xml-p' in file[0]]
     print(files_to_download[-5:])
-    file_home = '/home/zglg/SLU/psd/corpus/'
+    file_home = '../corpus/'
     data_paths = []
     file_info = []
     # Iterate through each file

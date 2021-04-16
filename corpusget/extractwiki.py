@@ -19,4 +19,4 @@ def combine_json_to_txt(filepath, save_file_name):
 
 
 if __name__ == "__main__":
-    combine_json_to_txt('/home/zglg/SLU/psd/corpus/english/enwiki', '/home/zglg/SLU/psd/corpus/english/wiki_en.txt')
+    combine_json_to_txt('../corpus/english/enwiki', '../corpus/english/wiki_en.txt')
