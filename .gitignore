@@ -1,3 +1,4 @@
 *.pyc
 .idea
-venv
+input
+__pycache__

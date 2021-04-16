@@ -1,6 +1,22 @@
 # util udpipemodel
 
+from typing import List
+
+
 # TODO: keeping update
+
+# database config
+# cofig for local database
+db_config = {
+    'host': 'psd-wordfinder.mysql.database.azure.com',
+    'database': 'psd_project',
+    'user': 'adminteam@psd-wordfinder',
+    'password': 'jFq&T7bPJXmY',
+    #'client_flags': [mysql.connector.ClientFlag.SSL],
+    #'ssl_ca': './/src//train//DigiCertGlobalRootG2.crt.pem' #vscode
+    'ssl_ca': 'DigiCertGlobalRootG2.crt.pem' #pycharm
+}
+
 language_list = [
     'Chinese',
     'English',
@@ -29,15 +45,6 @@ language_dict = {
     '10': 'Korean',
     '11': 'Portuguese',
     '12': 'Russian'
-}
-
-db_config = {
-    'host': 'psd-wordfinder.mysql.database.azure.com',
-    'database': 'psd_project',
-    'user': 'adminteam@psd-wordfinder',
-    'password': 'jFq&T7bPJXmY',
-    'client_flags': '[mysql.connector.ClientFlag.SSL]',
-    'ssl_ca': '/train/DigiCertGlobalRootG2.crt.pem'
 }
 
 # language and corresponding file path of corpus
