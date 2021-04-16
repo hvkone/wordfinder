@@ -149,13 +149,13 @@ class UdpipeTrain(ITrain):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='train corpus to get word, pos, and related sentence')
-    parser.add_argument('-udfp', help='udpipe pre-model filepath')
+    parser.add_argument('-udfp', help='udpipe pre-udpipemodel filepath')
     parser.add_argument('-cfp', help='corpus filepath for a specific language')
     args = parser.parse_args()
     if 'udfp' in args:
         udpipe_pre_model_path = args.udfp
     else:
-        print('please input udpipe pre-model filepath')
+        print('please input udpipe pre-udpipemodel filepath')
     if 'cfp' in args:
         corpus_filepath = args.cfp
     else:

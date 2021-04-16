@@ -26,13 +26,13 @@ class ClusterModel(object):
 
 
 def train_model(language_name, corpus_path, save_path, udpipe_model: UdpipeTrain):
-    """ train and save word2vec model
+    """ train and save word2vec udpipemodel
     :param udpipe_model:
     :param language_name:
     :param corpus_path: file path for train corpus
-    :param save_path: vector model path after finishing word2vec
+    :param save_path: vector udpipemodel path after finishing word2vec
     name rule of save_path is
-    '/home/zglg/SLU/psd/cluster_pre_train/gensim-word2vec-model-' + language_name
+    '/home/zglg/SLU/psd/cluster_pre_train/gensim-word2vec-udpipemodel-' + language_name
     :return:
     """
     sentences = ClusterModel(corpus_path, udpipe_model)
@@ -42,10 +42,10 @@ def train_model(language_name, corpus_path, save_path, udpipe_model: UdpipeTrain
 
 
 def load_model(save_path) -> gensim.models.Word2Vec:
-    """load model we have trained
+    """load udpipemodel we have trained
     :param save_path: filepath saved
-    note: because we have ruled the name for word2vec model, so rember to follow it.
-    :return: word2vec model we have trained
+    note: because we have ruled the name for word2vec udpipemodel, so rember to follow it.
+    :return: word2vec udpipemodel we have trained
     """
     filename = save_path
     model = gensim.models.Word2Vec.load(filename)
@@ -63,22 +63,22 @@ if __name__ == "__main__":
     languange_name = 'Chinese'
 
     # input example
-    # # udpipe pre-train model that we can download from a link in readme
-    # udpipe_pre_model_path = '/home/zglg/SLU/psd/pre-model/chinese-gsdsimp-ud-2.5-191206.udpipe'
+    # # udpipe pre-train udpipemodel that we can download from a link in readme
+    # udpipe_pre_model_path = '/home/zglg/SLU/psd/pre-udpipemodel/chinese-gsdsimp-ud-2.5-191206.udpipe'
     # # corpus for @language_name
     # corpus_filepath = '/home/zglg/SLU/psd/corpus/chinese/平凡的世界.txt'
     # # there are rules for word2vec file_path, please following:
-    # file_path = '/home/zglg/SLU/psd/cluster_pre_train/gensim-word2vec-model-'
+    # file_path = '/home/zglg/SLU/psd/cluster_pre_train/gensim-word2vec-udpipemodel-'
 
     parser = argparse.ArgumentParser(description='train corpus to get our word2vec for multiple languages')
-    parser.add_argument('-udfp', help='udpipe pre-model filepath')
+    parser.add_argument('-udfp', help='udpipe pre-udpipemodel filepath')
     parser.add_argument('-cfp', help='corpus filepath for a specific language')
     parser.add_argument('-wvfp', help='word vector filepath after finishing train')
     args = parser.parse_args()
     if 'udfp' in args:
         udpipe_pre_model_path = args.udfp
     else:
-        print('please input udpipe pre-model filepath')
+        print('please input udpipe pre-udpipemodel filepath')
     if 'cfp' in args:
         corpus_filepath = args.cfp
     else:
@@ -90,9 +90,9 @@ if __name__ == "__main__":
 
     # first loading udpipe to segement word for each sentence
     udt_english = UdpipeTrain(languange_name, udpipe_pre_model_path, corpus_filepath)
-    # second train to get the word2vec model
+    # second train to get the word2vec udpipemodel
     train_model(languange_name, corpus_filepath, file_path, udt_english)
-    # finally, after train we can load model to use directly
+    # finally, after train we can load udpipemodel to use directly
     load_model(file_path)
     print('All done')
 
