@@ -9,7 +9,7 @@ from __future__ import print_function
 from typing import List
 
 import pymysql
-
+import pymysql.cursors
 from src.train.result_model import TResult
 from src.util import db_config, language_dict
 

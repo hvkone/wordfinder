@@ -29,9 +29,10 @@ class UdpipeTrain(ITrain):
         try:
             self.store_data = StoreData(db_config['user'],
                                         db_config['password'],
-                                        db_host=db_config['db_host'],
-                                        db_name=db_config['db_name'])
+                                        db_config['host'],
+                                        db_config['database'])
             self.cursor = self.store_data.db_connect().cursor()
+            print('\nlogging will start in database \n')
         except Exception as ex:
             print('logging in database error %s' % ex)
 
@@ -165,9 +166,11 @@ if __name__ == '__main__':
 udt_chinese = UdpipeTrain(language_list[0], udpipe_pre_model_path, corpus_filepath)
 udt_chinese.do_train()
 '''
+
 # English
 udt_english = UdpipeTrain(language_list[1], udpipe_pre_model_path, corpus_filepath)
 udt_english.do_train()
+
 '''
 # Finnish
 udt_finnish = UdpipeTrain(language_list[2], udpipe_pre_model_path, corpus_filepath)
