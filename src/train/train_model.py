@@ -10,7 +10,7 @@ import string
 import re
 import argparse
 
-from corpy.udpipe import Model
+#from corpy.udpipe import Model
 from typing import List
 
 from src.train.base_model import ITrain
@@ -160,7 +160,20 @@ class UdpipeTrain(ITrain):
 
 def batch_train():
     for lang in language_list:
-        if lang in ['Chinese', 'English']:
+        if lang in [
+            'Chinese',
+            'English',
+            'Finnish',
+            'French',
+            'German',
+            'Greek',
+            'Hungarian',
+            'Italian',
+            'Japanese',
+            'Korean',
+            'Portuguese',
+            'Russian'
+        ]:
             continue
         udpipe_pre_model_path = udpipe_language[lang]
         corpus_filepath = corpus_language[lang]
@@ -188,30 +201,17 @@ if __name__ == '__main__':
     # udt_english = UdpipeTrain(language_list[0], udpipe_pre_model_path, corpus_filepath)
     # udt_english.do_train()
 
-    parser = argparse.ArgumentParser(description='train corpus to get word, pos, and related sentence')
-    parser.add_argument('-udfp', help='udpipe pre-udpipemodel filepath')
-    parser.add_argument('-cfp', help='corpus filepath for a specific language')
-    args = parser.parse_args()
-    if 'udfp' in args:
-        udpipe_pre_model_path = args.udfp
-    else:
-        print('please input udpipe pre-udpipemodel filepath')
-    if 'cfp' in args:
-        corpus_filepath = args.cfp
-    else:
-        print('please input corpus filepath')
-
 '''
 # Chinese
 udt_chinese = UdpipeTrain(language_list[0], udpipe_pre_model_path, corpus_filepath)
 udt_chinese.do_train()
 '''
-
+"""
 # English
 udt_english = UdpipeTrain(language_list[1], udpipe_pre_model_path, corpus_filepath)
 udt_english.do_train()
 
-'''
+
 # Finnish
 udt_finnish = UdpipeTrain(language_list[2], udpipe_pre_model_path, corpus_filepath)
 udt_finnish.do_train()
@@ -251,4 +251,4 @@ udt_portuguese.do_train()
 # Russian
 udt_russian = UdpipeTrain(language_list[11], udpipe_pre_model_path, corpus_filepath)
 udt_russian.do_train()
-'''
+"""

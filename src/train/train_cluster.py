@@ -32,9 +32,11 @@ class ClusterModel(object):
 
 
 def train_model(language_name,corpus_path,save_path,udpipe_model: UdpipeTrain):
-    """ train and save word2vec model
-def train_model(language_name, corpus_path, save_path, udpipe_model: UdpipeTrain):
-    """ train and save word2vec udpipemodel
+    """
+    train and save word2vec model
+    def train_model(language_name, corpus_path, save_path, udpipe_model: UdpipeTrain):
+
+    train and save word2vec udpipemodel
     :param udpipe_model:
     :param language_name:
     :param corpus_path: file path for train corpus
@@ -42,7 +44,7 @@ def train_model(language_name, corpus_path, save_path, udpipe_model: UdpipeTrain
     name rule of save_path is
     '/home/zglg/SLU/psd/cluster_pre_train/gensim-word2vec-udpipemodel-' + language_name
     :return:
-    
+    """
 
     sentences = ClusterModel(corpus_path, udpipe_model)
     model = gensim.models.Word2Vec(sentences=sentences,
@@ -117,11 +119,11 @@ if __name__ == "__main__":
     print('All done')
 
 
-        # first loading udpipe to segement word for each sentence
-        udt_lang = UdpipeTrain(lang, udpipe_pre_model_path, corpus_filepath)
-        # second train to get the word2vec model
-        word2vec_result_file = 'input//word2vecmodel//gensim-word2vec-model-'
-        train_model(lang, corpus_filepath, word2vec_result_file, udt_lang)
+    # first loading udpipe to segement word for each sentence
+    udt_lang = UdpipeTrain(lang, udpipe_pre_model_path, corpus_filepath)
+    # second train to get the word2vec model
+    word2vec_result_file = 'input//word2vecmodel//gensim-word2vec-model-'
+    train_model(lang, corpus_filepath, word2vec_result_file, udt_lang)
 
 
 if __name__ == "__main__":
