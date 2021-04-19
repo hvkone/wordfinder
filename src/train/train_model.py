@@ -162,6 +162,7 @@ def batch_train():
     for lang in language_list:
         if lang in [
             'Chinese',
+            'Dutch',
             'English',
             'Finnish',
             'French',
@@ -171,8 +172,11 @@ def batch_train():
             'Italian',
             'Japanese',
             'Korean',
+            'Latin',
+            'Polish',
             'Portuguese',
-            'Russian'
+            'Russian',
+            'Spanish'
         ]:
             continue
         udpipe_pre_model_path = udpipe_language[lang]
