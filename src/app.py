@@ -4,7 +4,7 @@ import json
 
 from src.train.result_model import TResult
 from src.train.store import StoreData
-from src.util import language_dict, language_list, db_config, cluster_model_file
+from src.util import language_dict, language_list, db_config, word2vec_language
 from src.service import AppService
 from flask import Flask, render_template, request, redirect, url_for, flash
 
@@ -19,7 +19,6 @@ appService = AppService()
 def index():
     """
     This is the index web page
-
     :return:index.html
     """
     return render_template('index.html')
@@ -29,7 +28,6 @@ def index():
 def find():
     """
     this method mainly solve /find request
-
     first, according to form data, select by database to get result
     second, reorganize to certain data structures
     finally, render to result.html
@@ -66,7 +64,6 @@ def find2():
 def cluster():
     """
     this method is mainly to solve the cluster question
-
     After getting form data, begining cluster
     finally return cluster example sentences
     :return:cluster.html
@@ -78,9 +75,13 @@ def cluster():
         cluster_input_sentence = appService.pos_dict[sel_tag]
         if not appService.udt_pre_model:
             appService.config_udpipe(language_name)
-        cluser_model_file = cluster_model_file[language_name]
-        cluster_result = appService.cluster_sentences(language_name, cluser_model_file, cluster_input_sentence, cluster_number)
-        return render_template('cluster.html', cluster_number=cluster_number, cluster_result=cluster_result)
+        cluster_model_file = word2vec_language[language_name]
+        cluster_result, rec_cluster_result = appService.cluster_sentences(
+            language_name, cluster_model_file, cluster_input_sentence, cluster_number)
+        return render_template('cluster.html',
+                               cluster_number=cluster_number,
+                               cluster_result=cluster_result,
+                               rec_cluster_result=rec_cluster_result)
 
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ import string
 import re
 import argparse
 
-#from corpy.udpipe import Model
+from corpy.udpipe import Model
 from typing import List
 
 from src.train.base_model import ITrain

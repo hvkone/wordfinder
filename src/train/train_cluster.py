@@ -77,7 +77,20 @@ def load_model(save_path) -> gensim.models.Word2Vec:
 
 def batch():
     for lang in language_list:
-        if lang in ['Chinese', 'English']:
+        if lang in [
+            'Chinese',
+            'English',
+            'Finnish',
+            'French',
+            'German',
+            'Greek',
+            'Hungarian',
+            'Italian',
+            'Japanese',
+            'Korean',
+            'Portuguese',
+            'Russian'
+        ]:
             continue
         udpipe_pre_model_path = udpipe_language[lang]
         corpus_filepath = corpus_language[lang]
