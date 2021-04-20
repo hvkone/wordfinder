@@ -99,7 +99,7 @@ def batch():
         udpipe_pre_model_path = udpipe_language[lang]
         corpus_filepath = corpus_language[lang]
 if __name__ == "__main__":
-    languange_name = 'Chinese'
+    languange_name = 'English'
 
     # input example
     # # udpipe pre-train udpipemodel that we can download from a link in readme
@@ -137,10 +137,10 @@ if __name__ == "__main__":
 
 
     # first loading udpipe to segement word for each sentence
-    udt_lang = UdpipeTrain(lang, udpipe_pre_model_path, corpus_filepath)
+    # udt_lang = UdpipeTrain(lang, udpipe_pre_model_path, corpus_filepath)
     # second train to get the word2vec model
-    word2vec_result_file = 'corpus//word2vecmodel//gensim-word2vec-model-'
-    train_model(lang, corpus_filepath, word2vec_result_file, udt_lang)
+    # word2vec_result_file = 'corpus//word2vecmodel//gensim-word2vec-model-'
+    # train_model(lang, corpus_filepath, word2vec_result_file, udt_lang)
 
 
 if __name__ == "__main__":
