@@ -79,6 +79,7 @@ def batch():
     for lang in language_list:
         if lang in [
             'Chinese',
+            'Dutch',
             'English',
             'Finnish',
             'French',
@@ -88,8 +89,11 @@ def batch():
             'Italian',
             'Japanese',
             'Korean',
+            'Latin',
+            'Polish',
             'Portuguese',
-            'Russian'
+            'Russian',
+            'Spanish'
         ]:
             continue
         udpipe_pre_model_path = udpipe_language[lang]
@@ -135,7 +139,7 @@ if __name__ == "__main__":
     # first loading udpipe to segement word for each sentence
     udt_lang = UdpipeTrain(lang, udpipe_pre_model_path, corpus_filepath)
     # second train to get the word2vec model
-    word2vec_result_file = 'input//word2vecmodel//gensim-word2vec-model-'
+    word2vec_result_file = 'corpus//word2vecmodel//gensim-word2vec-model-'
     train_model(lang, corpus_filepath, word2vec_result_file, udt_lang)
 
 

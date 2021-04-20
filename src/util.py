@@ -58,29 +58,29 @@ language_dict = {
 # language and corresponding file path of corpus
 # need to read all files in each folder instead of individual text
 corpus_language = {
-    'Chinese': './corpus/chinese/',
+    'Chinese': './corpus/chinese/23825-0.txt',
     'Dutch': './corpus/dutch/21800-0.txt',
-    'English': './corpus/english/',
-    'Finnish': './corpus/finish/',
-    'French': './corpus/french/',
-    'German': './corpus/german/',
-    'Greek': './corpus/greek/',
-    'Hungarian': './corpus/hungarian/',
-    'Italian': './corpus/italian/',
-    'Japanese': './corpus/japanese/',
+    'English': './corpus/english/135-0.txt',
+    'Finnish': './corpus/finish/44817-0.txt',
+    'French': './corpus/french/26376-0.txt',
+    'German': './corpus/german/14225-0.txt',
+    'Greek': './corpus/greek/17996-0.txt',
+    'Hungarian': './corpus/hungarian/34726-0.txt',
+    'Italian': './corpus/italian/3747-0.txt',
+    'Japanese': './corpus/japanese/1982-0.txt',
     'Korean': './corpus/korean/',
-    'Latin': './corpus/latin/',
-    'Polish': './corpus/polish/',
-    'Portuguese': './corpus/portuguese/',
-    'Russian': './corpus/russian/',
-    'Spanish': './corpus/spanish/'
+    'Latin': './corpus/latin/49764-0.txt',
+    'Polish': './corpus/polish/27928-0.txt',
+    'Portuguese': './corpus/portuguese/15047-0.txt',
+    'Russian': './corpus/russian/30774-0.txt',
+    'Spanish': './corpus/spanish/31633-0.txt'
 }
 
 udpipe_language = {
     'Chinese': './corpus/udpipemodel/chinese.udpipe',
     'Dutch': './corpus/udpipemodel/dutch.udpipe',
     'English': './corpus/udpipemodel/english.udpipe',
-    'Finnish': './/corpus/udpipemodel/finnish.udpipe',
+    'Finnish': './corpus/udpipemodel/finnish.udpipe',
     'French': './corpus/udpipemodel/french.udpipe',
     'German': './corpus/udpipemodel/german.udpipe',
     'Greek': './corpus/udpipemodel/greek.udpipe',
