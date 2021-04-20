@@ -39,7 +39,7 @@ class UdpipeTrain(ITrain):
             # second loading udpipe pre-train model
             self.model = Model(self.pre_model_name)
             self._word_count, self.MAX_WORD_COUNT = 0, 500000
-            print('\nlogging will start in database \n')
+            print('\n logging will start in database \n')
         except Exception as ex:
             print('logging in database error %s' % ex)
 
