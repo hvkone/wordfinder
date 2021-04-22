@@ -17,6 +17,7 @@ db_config = {
     'ssl_ca': 'DigiCertGlobalRootG2.crt.pem' #pycharm
 }
 
+
 language_list = [
     'Chinese',
     'Dutch',
@@ -69,7 +70,7 @@ corpus_language = {
     'Italian': './corpus/italian/3747-0.txt',
     'Japanese': './corpus/japanese/1982-0.txt',
     'Korean': './corpus/korean/',
-    'Latin': './corpus/latin/49764-0.txt',
+    'Latin': '\corpus\latin\sample3.txt',
     'Polish': './corpus/polish/27928-0.txt',
     'Portuguese': './corpus/portuguese/15047-0.txt',
     'Russian': './corpus/russian/30774-0.txt',
