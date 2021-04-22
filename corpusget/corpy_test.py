@@ -2,7 +2,7 @@ from corpy.udpipe import Model
 from corpy.udpipe import pprint
 
 
-m = Model("/home/zglg/SLU/psd/pre-udpipemodel/classical_chinese-kyoto-ud-2.5-191206.udpipe")
+m = Model(".//corpus//udpipemodel//chinese.udpipe")
 
-sents = list(m.process("我爱北京天安门. 天安门上好风景"))
+sents = list(m.process(".//corpus//chinese//23825-0.txt"))
 pprint(sents)

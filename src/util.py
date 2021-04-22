@@ -17,8 +17,10 @@ db_config = {
     'ssl_ca': 'DigiCertGlobalRootG2.crt.pem' #pycharm
 }
 
+
 language_list = [
     'Chinese',
+    'Dutch',
     'English',
     'Finnish',
     'French',
@@ -28,52 +30,90 @@ language_list = [
     'Italian',
     'Japanese',
     'Korean',
+    'Latin',
+    'Polish',
     'Portuguese',
-    'Russian'
+    'Russian',
+    'Spanish'
 ]
 
 language_dict = {
     '1': 'Chinese',
-    '2': 'English',
-    '3': 'Finnish',
-    '4': 'French',
-    '5': 'German',
-    '6': 'Greek',
-    '7': 'Hungarian',
-    '8': 'Italian',
-    '9': 'Japanese',
-    '10': 'Korean',
-    '11': 'Portuguese',
-    '12': 'Russian'
+    '2': 'Dutch',
+    '3': 'English',
+    '4': 'Finnish',
+    '5': 'French',
+    '6': 'German',
+    '7': 'Greek',
+    '8': 'Hungarian',
+    '9': 'Italian',
+    '10': 'Japanese',
+    '11': 'Korean',
+    '12': 'Latin',
+    '13': 'Polish',
+    '14': 'Portuguese',
+    '15': 'Russian',
+    '16': 'Spanish'
 }
 
 # language and corresponding file path of corpus
-corpus_language = {'Chinese': './/corpus//chinese//23825-0.txt',
-                   'English': './/corpus//english//wiki_en.txt',
-                   'French': './/corpus//french//wiki_fr.txt',
-                   'Italian': './/corpus//italian//wiki_it.txt',
-                   'Spanish': './/corpus//spanish//wiki_es.txt',
-                   'Korean': './/corpus//korean//wiki_ko.txt',
-                   'Russian': './/corpus//russian//wiki_ru.txt',
-                   'Portuguese': './/corpus//portuguese//wiki_pt.txt'}
+# need to read all files in each folder instead of individual text
+corpus_language = {
+    'Chinese': './corpus/chinese/23825-0.txt',
+    'Dutch': './corpus/dutch/21800-0.txt',
+    'English': './corpus/english/135-0.txt',
+    'Finnish': './corpus/finish/44817-0.txt',
+    'French': './corpus/french/26376-0.txt',
+    'German': './corpus/german/14225-0.txt',
+    'Greek': './corpus/greek/17996-0.txt',
+    'Hungarian': './corpus/hungarian/34726-0.txt',
+    'Italian': './corpus/italian/3747-0.txt',
+    'Japanese': './corpus/japanese/1982-0.txt',
+    'Korean': './corpus/korean/',
+    'Latin': '\corpus\latin\sample3.txt',
+    'Polish': './corpus/polish/27928-0.txt',
+    'Portuguese': './corpus/portuguese/15047-0.txt',
+    'Russian': './corpus/russian/30774-0.txt',
+    'Spanish': './corpus/spanish/31633-0.txt'
+}
 
-udpipe_language = {'Chinese': './/corpus//udpipemodel//chinese.udpipe',
-                   'English': './/corpus//udpipemodel//english.udpipe',
-                   'French': './/corpus//udpipemodel//french.udpipe',
-                   'Italian': './/corpus//udpipemodel//italian.udpipe',
-                   'Spanish': './/corpus//udpipemodel//spanish.udpipe',
-                   'Korean': './/corpus//udpipemodel//korean.udpipe',
-                   'Russian': './/corpus//udpipemodel//russian.udpipe',
-                   'Portuguese': './/corpus//udpipemodel//portuguese.udpipe'}
+udpipe_language = {
+    'Chinese': './corpus/udpipemodel/chinese.udpipe',
+    'Dutch': './corpus/udpipemodel/dutch.udpipe',
+    'English': './corpus/udpipemodel/english.udpipe',
+    'Finnish': './corpus/udpipemodel/finnish.udpipe',
+    'French': './corpus/udpipemodel/french.udpipe',
+    'German': './corpus/udpipemodel/german.udpipe',
+    'Greek': './corpus/udpipemodel/greek.udpipe',
+    'Hungarian': './corpus/udpipemodel/hungarian.udpipe',
+    'Italian': './corpus/udpipemodel/italian.udpipe',
+    'Japanese': './corpus/udpipemodel/japanese.udpipe',
+    'Korean': './corpus/udpipemodel/korean.udpipe',
+    'Latin': './corpus/udpipemodel/latin.udpipe',
+    'Polish': './corpus/udpipemodel/polish.udpipe',
+    'Portuguese': './corpus/udpipemodel/portuguese.udpipe',
+    'Russian': './corpus/udpipemodel/russian.udpipe',
+    'Spanish': './corpus/udpipemodel/spanish.udpipe'
+}
 
-word2vec_language = {'Chinese': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Chinese',
-                     'English': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-English',
-                     'French': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-French',
-                     'Italian': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Italian',
-                     'Spanish': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Spanish',
-                     'Korean': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Korean',
-                     'Russian': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Russian',
-                     'Portuguese': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Portuguese'}
+word2vec_language = {
+    'Chinese': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Chinese',
+    'Dutch': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Dutch',
+    'English': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-English',
+    'Finnish': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Finnish',
+    'French': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-French',
+    'German': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-German',
+    'Greek': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Greek',
+    'Hungarian': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Hungarian',
+    'Italian': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Italian',
+    'Japanese': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Japanese',
+    'Korean': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Korean',
+    'Latin': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Latin',
+    'Polish': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Polish',
+    'Portuguese': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Portuguese',
+    'Russian': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Russian',
+    'Spanish': './corpus/word2vecmodel/gensim-word2vec-udpipemodel-Spanish'
+}
 
 
 def get_keyword_window(sel_word: str, words_of_sentence: List, length=5) -> List[str]:

@@ -19,7 +19,6 @@ appService = AppService()
 def index():
     """
     This is the index web page
-
     :return:index.html
     """
     return render_template('index.html')
@@ -29,7 +28,6 @@ def index():
 def find():
     """
     this method mainly solve /find request
-
     first, according to form data, select by database to get result
     second, reorganize to certain data structures
     finally, render to result.html
@@ -66,7 +64,6 @@ def find2():
 def cluster():
     """
     this method is mainly to solve the cluster question
-
     After getting form data, begining cluster
     finally return cluster example sentences
     :return:cluster.html

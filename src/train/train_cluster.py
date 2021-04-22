@@ -12,8 +12,8 @@ from src.util import language_list, db_config, corpus_language, udpipe_language
 
 
 class ClusterModel(object):
-    def __init__(self, corpus_path, udpipe_model: UdpipeTrain):
-        self.corpus_path = corpus_path
+    def __init__(self, corpus_language, udpipe_model: UdpipeTrain):
+        self.corpus_path = corpus_language
         self.udpipe_model = udpipe_model
         self._word_count, self._MAX_WORD_COUNT = 0, 500000
 
@@ -32,9 +32,11 @@ class ClusterModel(object):
 
 
 def train_model(language_name,corpus_path,save_path,udpipe_model: UdpipeTrain):
-    """ train and save word2vec model
-def train_model(language_name, corpus_path, save_path, udpipe_model: UdpipeTrain):
-    """ train and save word2vec udpipemodel
+    """
+    train and save word2vec model
+    def train_model(language_name, corpus_path, save_path, udpipe_model: UdpipeTrain):
+
+    train and save word2vec udpipemodel
     :param udpipe_model:
     :param language_name:
     :param corpus_path: file path for train corpus
@@ -42,7 +44,7 @@ def train_model(language_name, corpus_path, save_path, udpipe_model: UdpipeTrain
     name rule of save_path is
     '/home/zglg/SLU/psd/cluster_pre_train/gensim-word2vec-udpipemodel-' + language_name
     :return:
-    
+    """
 
     sentences = ClusterModel(corpus_path, udpipe_model)
     model = gensim.models.Word2Vec(sentences=sentences,
@@ -75,12 +77,29 @@ def load_model(save_path) -> gensim.models.Word2Vec:
 
 def batch():
     for lang in language_list:
-        if lang in ['Chinese', 'English']:
+        if lang in [
+            'Chinese',
+            'Dutch',
+            'English',
+            'Finnish',
+            'French',
+            'German',
+            'Greek',
+            'Hungarian',
+            'Italian',
+            'Japanese',
+            'Korean',
+            'Latin',
+            'Polish',
+            'Portuguese',
+            'Russian',
+            'Spanish'
+        ]:
             continue
         udpipe_pre_model_path = udpipe_language[lang]
         corpus_filepath = corpus_language[lang]
 if __name__ == "__main__":
-    languange_name = 'Chinese'
+    languange_name = 'English'
 
     # input example
     # # udpipe pre-train udpipemodel that we can download from a link in readme
@@ -117,11 +136,11 @@ if __name__ == "__main__":
     print('All done')
 
 
-        # first loading udpipe to segement word for each sentence
-        udt_lang = UdpipeTrain(lang, udpipe_pre_model_path, corpus_filepath)
-        # second train to get the word2vec model
-        word2vec_result_file = 'input//word2vecmodel//gensim-word2vec-model-'
-        train_model(lang, corpus_filepath, word2vec_result_file, udt_lang)
+    # first loading udpipe to segement word for each sentence
+    # udt_lang = UdpipeTrain(lang, udpipe_pre_model_path, corpus_filepath)
+    # second train to get the word2vec model
+    # word2vec_result_file = 'corpus//word2vecmodel//gensim-word2vec-model-'
+    # train_model(lang, corpus_filepath, word2vec_result_file, udt_lang)
 
 
 if __name__ == "__main__":
