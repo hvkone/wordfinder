@@ -12,8 +12,8 @@ from src.util import language_list, db_config, corpus_language, udpipe_language
 
 
 class ClusterModel(object):
-    def __init__(self, corpus_path, udpipe_model: UdpipeTrain):
-        self.corpus_path = corpus_path
+    def __init__(self, corpus_language, udpipe_model: UdpipeTrain):
+        self.corpus_path = corpus_language
         self.udpipe_model = udpipe_model
         self._word_count, self._MAX_WORD_COUNT = 0, 500000
 
