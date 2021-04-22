@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 
 import unittest
 from unittest import mock
-
+from util import db_config
 
 class Test_insert_rows(unittest.TestCase):
 
@@ -39,10 +39,10 @@ class Test_insert_rows(unittest.TestCase):
 
         connectDB()
 
-        mock_sql.connect.assert_called_with(host='localhost',
-                                            user='user',
-                                            password='passwd',
-                                            db='db')
+        mock_sql.connect.assert_called_with(host=db_config['host'],
+                                            user=db_config['user'],
+                                            password=db_config['password'],
+                                            db=db_config['database'])
 
         mock_result.execute.assert_called_with("sql request", ("user", "pass"))
     

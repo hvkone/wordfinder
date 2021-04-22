@@ -104,8 +104,8 @@ def cluster_sentences(language_name: str, save_path: str, sentences: List[str], 
 
 
 a = database()
-file_path= r'./corpus/word2vecmodel/'
-language_name = 'English'
+file_path = './corpus/word2vecmodel/'
+language_name = 'english'
 file_path = file_path + language_name
 load_model(file_path)
 print('All done')
@@ -119,7 +119,7 @@ sentences = [
 	'Al Mulock was the great-grandson of Sir William Mulock(1843–1944), the former Canadian Postmaster - General.',
 	'Though his surviving images are scarce, his importance to the early history of photography in Asia is great.']
 
-cluster_result = cluster_sentences(langage_name, file_path,c,3)
+cluster_result = cluster_sentences(language_name, file_path,c,3)
 print("two examples sentences: \n")
 print(cluster_result)
 
