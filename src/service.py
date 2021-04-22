@@ -21,8 +21,8 @@ from src.train.cluster import Evaluator
 try:
     store_data = StoreData(db_config['user'],
                            db_config['password'],
-                           db_config['host'],
-                           db_config['database'])
+                           db_host=db_config['db_host'],
+                           db_name=db_config['db_name'])
     cnx = store_data.db_connect()
     cursor = cnx.cursor()
 except Exception as ex:
@@ -76,8 +76,8 @@ class AppService(object):
     def database(self):
         self.store_data = StoreData(db_config['user'],
                                     db_config['password'],
-                                    db_config['host'],
-                                    db_config['database'])
+                                    db_host=db_config['db_host'],
+                                    db_name=db_config['db_name'])
         self.cursor = self.store_data.db_connect().cursor()
         query_info = "SELECT sentence FROM english_sentences"
         self.cursor.execute(query_info)
@@ -87,8 +87,8 @@ class AppService(object):
     def clusteringData(self):
         self.store_data = StoreData(db_config['user'],
                                     db_config['password'],
-                                    db_config['host'],
-                                    db_config['database'])
+                                    db_host=db_config['db_host'],
+                                    db_name=db_config['db_name'])
         self.cursor = self.store_data.db_connect().cursor()
         query_info = "SELECT sentence FROM english_sentences"
         self.cursor.execute(query_info)
@@ -204,15 +204,13 @@ if __name__ == "__main__":
         'Tohru shows great loyalty to whoever he stands by, even back to the time when he was an Enforcer for the Dark Hand.',
         'The Earth Demon, Dai Gui resembles a large minotaur(with the face of a guardian lion) with great strength.',
         'Al Mulock was the great-grandson of Sir William Mulock(1843–1944), the former Canadian Postmaster - General.',
-        'Though his surviving images are scarce, his importance to the early history of photography in Asia is great.'
-    ]
-    save_path = './/corpus//english//'
+        'Though his surviving images are scarce, his importance to the early history of photography in Asia is great.']
+
     # first loading udpipe to segement word for each sentence
-    '''
     udt_english = UdpipeTrain(language_list[1],
-                              r'.//corpus//udpipemodel//english.udpipe',
-                              r'.//corpus//english//135-0.txt')
-    '''
-    cluster_result = AppService().config_udpipe(language_name).cluster_sentences(language_name, save_path, sentences='3', n_clusters=2)
+                              r'C:\Users\haris\Desktop\wordFinder\english-ewt-ud-2.5-191206.udpipe',
+                              r'C:\Users\haris\Desktop\wordFinder\haris.txt')
+
+    cluster_result = AppService().config_udpipe(language_name).cluster_sentences(language_name, sentences, 2)
     print("two examples sentences: \n")
     print(cluster_result)

@@ -4,8 +4,8 @@
 % Mail : goto.champion@gmail.com
 % Blog : kang.blog.com
 %% -------------------------------------------------------------------
-website = 'http://www.gutenberg.org/browse/languages/ru'; % the website you wanna crawling
-filetypes = {'txt'}; % the file your wanna download during crawling
+website = 'https://dumps.wikimedia.org/enwiki/latest/'; % the website you wanna crawling
+filetypes = {'bz2'}; % the file your wanna download during crawling
 downloadPath = uigetdir; % where to download
 if ~isdir(downloadPath)
     mkdir(downloadPath);
