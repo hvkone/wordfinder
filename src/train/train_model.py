@@ -4,7 +4,6 @@ this module is mainly used to train our corpus according to UDpipe pre-train mod
 Remember: working directory needed to be set to wordfinder!
 """
 
-
 # third-party modules
 import string
 import re
@@ -33,8 +32,8 @@ class UdpipeTrain(ITrain):
         try:
             self.store_data = StoreData(db_config['user'],
                                         db_config['password'],
-                                        db_config['host'],
-                                        db_config['database'])
+                                        db_config['db_host'],
+                                        db_config['db_name'])
             self.cursor = self.store_data.db_connect().cursor()
             # second loading udpipe pre-train model
             self.model = Model(self.pre_model_name)
@@ -60,7 +59,7 @@ class UdpipeTrain(ITrain):
         """
         cleaned_data = re.sub('\w*\d\w*', '', data)
         cleaned_data = re.sub('\[.*?\]', '', cleaned_data)
-        cleaned_data = re.sub('[‘’“”…]','',cleaned_data)
+        cleaned_data = re.sub('[‘’“”…]', '', cleaned_data)
         cleaned_data = re.sub(r'\\t | \\n', '', cleaned_data)
         return cleaned_data
 
@@ -83,7 +82,7 @@ class UdpipeTrain(ITrain):
             for i, one_sentence in enumerate(word_pos):
                 sentence_text = self.extract_one_sentence(one_sentence)
                 results = self.extract_one_word(one_sentence, sentence_text)
-                self.store_data.insert_data(self.cursor, results, self.language_name)
+                # self.store_data.insert_data(self.cursor, results, self.language_name)
                 print('line %d, batch %d for %s written succeed' % (line_no, i, self.language_name))
             line_no += 1
         print(' all written succeed for corpus of %s' % self.our_corpus_name)
@@ -137,7 +136,7 @@ class UdpipeTrain(ITrain):
         for word in sentence.words:
             if word.lemma and word.lemma not in string.punctuation:
                 if word.lemma and word.upostag and sentence_text:
-                    combined_words .append(TResult(word.lemma, word.upostag, sentence_text))
+                    combined_words.append(TResult(word.lemma, word.upostag, sentence_text))
                     self._word_count += 1
         return combined_words
 
@@ -165,29 +164,13 @@ def batch_train():
         udpipe_pre_model_path = udpipe_language[lang]
         corpus_filepath = corpus_language[lang]
         train_model = UdpipeTrain(lang, udpipe_pre_model_path, corpus_filepath)
-        print('begin train %s corpus' % (lang, ))
+        print('begin train %s corpus' % (lang,))
         train_model.do_train()
         print('done train %s corpus' % (lang,))
 
 
 if __name__ == '__main__':
-    batch_train()
-    # parser = argparse.ArgumentParser(description='train corpus to get word, pos, and related sentence')
-    # parser.add_argument('-udfp', help='udpipe pre-model filepath')
-    # parser.add_argument('-cfp', help='corpus filepath for a specific language')
-    # args = parser.parse_args()
-    # if 'udfp' in args:
-    #     udpipe_pre_model_path = args.udfp
-    # else:
-    #     print('please input udpipe pre-model filepath')
-    # if 'cfp' in args:
-    #     corpus_filepath = args.cfp
-    # else:
-    #     print('please input corpus filepath')
-    #
-    # udt_english = UdpipeTrain(language_list[0], udpipe_pre_model_path, corpus_filepath)
-    # udt_english.do_train()
-
+    # batch_train()
     parser = argparse.ArgumentParser(description='train corpus to get word, pos, and related sentence')
     parser.add_argument('-udfp', help='udpipe pre-udpipemodel filepath')
     parser.add_argument('-cfp', help='corpus filepath for a specific language')
@@ -201,54 +184,6 @@ if __name__ == '__main__':
     else:
         print('please input corpus filepath')
 
-'''
-# Chinese
-udt_chinese = UdpipeTrain(language_list[0], udpipe_pre_model_path, corpus_filepath)
-udt_chinese.do_train()
-'''
-
 # English
-udt_english = UdpipeTrain(language_list[1], udpipe_pre_model_path, corpus_filepath)
-udt_english.do_train()
-
-'''
-# Finnish
-udt_finnish = UdpipeTrain(language_list[2], udpipe_pre_model_path, corpus_filepath)
-udt_finnish.do_train()
-
-# French
-udt_french = UdpipeTrain(language_list[3], udpipe_pre_model_path, corpus_filepath)
-udt_french.do_train()
-
-# German
-udt_german = UdpipeTrain(language_list[4], udpipe_pre_model_path, corpus_filepath)
-udt_german.do_train()
-
-# Greek
-udt_greek = UdpipeTrain(language_list[5], udpipe_pre_model_path, corpus_filepath)
-udt_greek.do_train()
-
-# Hungarian
-udt_hungarian = UdpipeTrain(language_list[6], udpipe_pre_model_path, corpus_filepath)
-udt_hungarian.do_train()
-
-# Italian
-udt_italian = UdpipeTrain(language_list[7], udpipe_pre_model_path, corpus_filepath)
-udt_italian.do_train()
-
-# Japanese
-udt_japanese = UdpipeTrain(language_list[8], udpipe_pre_model_path, corpus_filepath)
-udt_japanese.do_train()
-
-# Korean
-udt_korean = UdpipeTrain(language_list[9], udpipe_pre_model_path, corpus_filepath)
-udt_korean.do_train()
-
-# Portuguese
-udt_portuguese = UdpipeTrain(language_list[10], udpipe_pre_model_path, corpus_filepath)
-udt_portuguese.do_train()
-
-# Russian
-udt_russian = UdpipeTrain(language_list[11], udpipe_pre_model_path, corpus_filepath)
-udt_russian.do_train()
-'''
+    udt_english = UdpipeTrain(language_list[1], udpipe_pre_model_path, corpus_filepath)
+    udt_english.do_train()

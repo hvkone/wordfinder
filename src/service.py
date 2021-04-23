@@ -79,7 +79,7 @@ class AppService(object):
                                     db_host=db_config['db_host'],
                                     db_name=db_config['db_name'])
         self.cursor = self.store_data.db_connect().cursor()
-        query_info = "SELECT sentence FROM english_sentences"
+        query_info = "SELECT sentence FROM English_sentences"
         self.cursor.execute(query_info)
         sentences_df = pd.DataFrame(self.cursor.fetchall(), columns=['Sentences'])
         return sentences_df
@@ -90,7 +90,7 @@ class AppService(object):
                                     db_host=db_config['db_host'],
                                     db_name=db_config['db_name'])
         self.cursor = self.store_data.db_connect().cursor()
-        query_info = "SELECT sentence FROM english_sentences"
+        query_info = "SELECT sentence FROM English_sentences"
         self.cursor.execute(query_info)
         sentences_dataframe = pd.DataFrame(self.cursor.fetchall(), columns=['Sentences'])
         return sentences_dataframe
@@ -129,7 +129,7 @@ class AppService(object):
             words = self.udt_pre_model.word_segmentation(sent)
             word_vectors = []
             # iterator to word
-            window_words = get_keyword_window(self.sel_result[0][0], words, 5)
+            window_words = get_keyword_window(self.sel_result[0][0], words, 10)
             for word in window_words:
                 if word in word2vec_model.wv:
                     word_vectors.append(word2vec_model.wv[word])
@@ -207,9 +207,9 @@ if __name__ == "__main__":
         'Though his surviving images are scarce, his importance to the early history of photography in Asia is great.']
 
     # first loading udpipe to segement word for each sentence
-    udt_english = UdpipeTrain(language_list[1],
-                              r'C:\Users\haris\Desktop\wordFinder\english-ewt-ud-2.5-191206.udpipe',
-                              r'C:\Users\haris\Desktop\wordFinder\haris.txt')
+    # udt_english = UdpipeTrain(language_list[1],
+    #                           r'C:\Users\haris\Desktop\wordFinder\english-ewt-ud-2.5-191206.udpipe',
+    #                           r'C:\Users\haris\Desktop\wordFinder\haris.txt')
 
     cluster_result = AppService().config_udpipe(language_name).cluster_sentences(language_name, sentences, 2)
     print("two examples sentences: \n")

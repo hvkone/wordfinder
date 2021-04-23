@@ -7,73 +7,70 @@ from typing import List
 
 # database config
 # cofig for local database
-db_config = {
-    'host': 'psd-wordfinder.mysql.database.azure.com',
-    'database': 'psd_project',
-    'user': 'adminteam@psd-wordfinder',
-    'password': 'jFq&T7bPJXmY',
-    #'client_flags': [mysql.connector.ClientFlag.SSL],
-    #'ssl_ca': './/src//train//DigiCertGlobalRootG2.crt.pem' #vscode
-    'ssl_ca': 'DigiCertGlobalRootG2.crt.pem' #pycharm
-}
+db_config = {'user': 'root',
+             'password': 'root',
+             'db_host': 'localhost',
+             'db_name': 'psd_project'}
+
 
 language_list = [
     'Chinese',
     'English',
-    'Finnish',
-    'French',
-    'German',
-    'Greek',
-    'Hungarian',
-    'Italian',
-    'Japanese',
-    'Korean',
-    'Portuguese',
-    'Russian'
+    # 'French',
+    # 'German',
+    # 'Greek',
+    # 'Hungarian',
+    # 'Italian',
+    # 'Japanese',
+    # 'Korean',
+    # 'Portuguese',
+    # 'Russian'
 ]
 
 language_dict = {
     '1': 'Chinese',
     '2': 'English',
-    '3': 'Finnish',
-    '4': 'French',
-    '5': 'German',
-    '6': 'Greek',
-    '7': 'Hungarian',
-    '8': 'Italian',
-    '9': 'Japanese',
-    '10': 'Korean',
-    '11': 'Portuguese',
-    '12': 'Russian'
+    # '3': 'French',
+    # '4': 'German',
+    # '5': 'Greek',
+    # '6': 'Hungarian',
+    # '7': 'Italian',
+    # '8': 'Japanese',
+    # '9': 'Korean',
+    # '10': 'Portuguese',
+    # '11': 'Russian'
 }
 
 # language and corresponding file path of corpus
-corpus_language = {'Chinese': './/corpus//chinese//23825-0.txt',
-                   'English': './/corpus//english//wiki_en.txt',
-                   'French': './/corpus//french//wiki_fr.txt',
-                   'Italian': './/corpus//italian//wiki_it.txt',
-                   'Spanish': './/corpus//spanish//wiki_es.txt',
-                   'Korean': './/corpus//korean//wiki_ko.txt',
-                   'Russian': './/corpus//russian//wiki_ru.txt',
-                   'Portuguese': './/corpus//portuguese//wiki_pt.txt'}
+corpus_language = {'Chinese': '/home/lodhi/Github/Corpus/chineseCorpus.txt',
+                   'English': '/home/lodhi/Github/Corpus/englishCorpus.txt',
+                   # 'French': './/corpus//french//wiki_fr.txt',
+                   # 'Italian': './/corpus//italian//wiki_it.txt',
+                   # 'Spanish': './/corpus//spanish//wiki_es.txt',
+                   # 'Korean': './/corpus//korean//wiki_ko.txt',
+                   # 'Russian': './/corpus//russian//wiki_ru.txt',
+                   # 'Portuguese': './/corpus//portuguese//wiki_pt.txt'
+                   }
 
 udpipe_language = {'Chinese': './/corpus//udpipemodel//chinese.udpipe',
-                   'English': './/corpus//udpipemodel//english.udpipe',
-                   'French': './/corpus//udpipemodel//french.udpipe',
-                   'Italian': './/corpus//udpipemodel//italian.udpipe',
-                   'Spanish': './/corpus//udpipemodel//spanish.udpipe',
-                   'Korean': './/corpus//udpipemodel//korean.udpipe',
-                   'Russian': './/corpus//udpipemodel//russian.udpipe',
-                   'Portuguese': './/corpus//udpipemodel//portuguese.udpipe'}
+                   'English': '/home/lodhi/Github/wordfinder/corpus/udpipemodel/english-ewt-ud-2.5-191206.udpipe',
+                   # 'French': './/corpus//udpipemodel//french.udpipe',
+                   # 'Italian': './/corpus//udpipemodel//italian.udpipe',
+                   # 'Spanish': './/corpus//udpipemodel//spanish.udpipe',
+                   # 'Korean': './/corpus//udpipemodel//korean.udpipe',
+                   # 'Russian': './/corpus//udpipemodel//russian.udpipe',
+                   # 'Portuguese': './/corpus//udpipemodel//portuguese.udpipe'
+                   }
 
-word2vec_language = {'Chinese': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Chinese',
-                     'English': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-English',
-                     'French': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-French',
-                     'Italian': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Italian',
-                     'Spanish': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Spanish',
-                     'Korean': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Korean',
-                     'Russian': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Russian',
-                     'Portuguese': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Portuguese'}
+word2vec_language = {'Chinese': '/home/lodhi/Github/Corpus/Chinese',
+                     'English': '/home/lodhi/Github/Corpus/English',
+                     # 'French': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-French',
+                     # 'Italian': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Italian',
+                     # 'Spanish': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Spanish',
+                     # 'Korean': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Korean',
+                     # 'Russian': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Russian',
+                     # 'Portuguese': './/corpus//word2vecmodel//gensim-word2vec-udpipemodel-Portuguese'
+                     }
 
 
 def get_keyword_window(sel_word: str, words_of_sentence: List, length=5) -> List[str]:
