@@ -202,7 +202,7 @@ if __name__ == '__main__':
     else:
         print('please input corpus filepath')
     # Italian
-    udt_english = UdpipeTrain(language_list[2], udpipe_pre_model_path, corpus_filepath)
+    udt_english = UdpipeTrain(language_list[15], udpipe_pre_model_path, corpus_filepath)
     udt_english.do_train()
 '''
 # Chinese
