@@ -10,6 +10,7 @@ import numpy as np
 from typing import List
 from sklearn.cluster import KMeans
 from collections import defaultdict
+import pymysql
 
 from src.train.result_model import TResult
 from src.train.store import StoreData
@@ -198,6 +199,7 @@ class AppService(object):
 
 
 if __name__ == "__main__":
+    '''
     # get word vector for one sentence
     language_name = 'English'
     sentences = [
@@ -208,11 +210,13 @@ if __name__ == "__main__":
     ]
     save_path = './/corpus//english//'
     # first loading udpipe to segement word for each sentence
-    '''
+   
     udt_english = UdpipeTrain(language_list[1],
                               r'.//corpus//udpipemodel//english.udpipe',
                               r'.//corpus//english//135-0.txt')
-    '''
+    
     cluster_result = AppService().config_udpipe(language_name).cluster_sentences(language_name, save_path, sentences='3', n_clusters=2)
+    '''
+    cluster_result = AppService().config_udpipe(language_name).cluster_sentences(language_name, sentences, 2)
     print("two examples sentences: \n")
     print(cluster_result)

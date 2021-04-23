@@ -15,22 +15,12 @@ for lang in language_list:
         path = os.getcwd()+file_dir
 
 org_file = open(path,'r+')
-ready_file = open(path,'w')
-# prepare your ready file
+org_content = org_file.read()
+#org_file.close()
 
-for line in org_file:
-    # substitute useless information this also creates some formatting for the actually loading into mysql
-    line = re.sub('latin_sentences|', '\n', line)
-    line = re.sub('latin_sentences|', '', line)
-    ready_file.write(line)
-
-# load your ready file into db
-
-# close file
-ready_file.close()
-
-table_query = "LOAD DATA LOCAL INFILE %s INSERT INTO latin_sentences field terminated by '|' lines terminated by '\n'" % ready_file
-conn_cur.execute(table_query)
+table_query = "INSERT INTO latin_sentences VALUES sentence (%s)"
+conn_cur.execute(table_query, (org_content,))
 
 conn.commit()
+conn.close()
 print(conn_cur.rowcount, "Record Inserted")
