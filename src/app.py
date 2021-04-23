@@ -64,7 +64,7 @@ def find2():
 def cluster():
     """
     this method is mainly to solve the cluster question
-    After getting form data, begining cluster
+    After getting form data, beginning cluster
     finally return cluster example sentences
     :return:cluster.html
     """
