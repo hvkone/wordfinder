@@ -8,6 +8,7 @@ import numpy as np
 from sklearn.cluster import KMeans
 from nltk.tokenize import word_tokenize
 import string
+from util import db_config
 
 
 
@@ -37,10 +38,10 @@ def load_model(save_path) -> gensim.models.Word2Vec:
 def database():
 
 	db = mysql.connector.connect(
-		host='localhost',
-		user='root',
-		password='root',
-		database='psd_project'
+		host=db_config['host'],
+		user=db_config['user'],
+		password=db_config['password'],
+		database=db_config['database']
 		)
 	mycursor = db.cursor()
 	query_info = ("SELECT sentence FROM english_sentences")
@@ -103,22 +104,22 @@ def cluster_sentences(language_name: str, save_path: str, sentences: List[str], 
 
 
 a = database()
-file_path= r'C:\Users\haris\Desktop\wordFinder\word2vec'
-file_path = file_path + 'English'
+file_path = './corpus/word2vecmodel/'
+language_name = 'english'
+file_path = file_path + language_name
 load_model(file_path)
 print('All done')
 
 c=a['Sentences'].apply(textProcessing)
 
 # get word vector for one sentence
-language_name = 'English'
 sentences = [
 	'Tohru shows great loyalty to whoever he stands by, even back to the time when he was an Enforcer for the Dark Hand.',
 	'The Earth Demon, Dai Gui resembles a large minotaur(with the face of a guardian lion) with great strength.',
 	'Al Mulock was the great-grandson of Sir William Mulock(1843–1944), the former Canadian Postmaster - General.',
 	'Though his surviving images are scarce, his importance to the early history of photography in Asia is great.']
 
-cluster_result = cluster_sentences(langage_name, file_path,c,3)
+cluster_result = cluster_sentences(language_name, file_path,c,3)
 print("two examples sentences: \n")
 print(cluster_result)
 

@@ -4,7 +4,6 @@ def getNGrams(wordlist, n):
 # Given a list of n-grams, return a dictionary of KWICs,
 # indexed by keyword.
 
-
 def nGramsToKWICDict(ngrams):
     keyindex = len(ngrams[0]) // 2
 
@@ -112,7 +111,6 @@ def cut_to_sentence(text, keyword, keywordindex):
         end = min(find_results_bigger_neg_1) + 1
 
     return list(range(start, end)), text[start:end]
-
 
 def find_nth_occurrence(text, searchstr, nth=1, startindex=0):
     """
@@ -243,16 +241,11 @@ if __name__ == "__main__":
     Text = Sentence which needs to be shrinked
     Keyword = Searched word
     """
-    TEXTs = [
-        'In 222 BC, the Romans besieged Acerrae, an Insubre fortification on the right bank of the River Adda between Cremona and Laus Pompeia (Lodi Vecchio).',
-        'A spokesman for the bank said "We will be compensating customers who did not receive full services from Affinion, and providing our apology."',
-        'One of the first fully functional direct banks in the United States was the Security First Network Bank (SFNB), which was launched in October 1995',
-        'At the same time, internet-only banks or "virtual banks" appeared.',
-        'Arriving at the Douro, Wellesley was unable to cross the river because Soult\'s army had either destroyed or moved all the boats to the northern bank.']
-    KEYWORDS = ['bank']
-    for TEXT in TEXTs:
-        result_text = keywords_in_context(TEXT, KEYWORDS)
-        # Highlight Keywords
-        for k in KEYWORDS:
-            result_text = find_and_replace(result_text, k, "\x1b[34m"+k+"\x1b[0m")
-            print(result_text)
+
+    result_text = keywords_in_context(TEXT, KEYWORDS)
+    # Highlight Keywords
+    for k in KEYWORDS:
+        result_text = find_and_replace(result_text, k, "\x1b[34m"+k+"\x1b[0m")
+
+    print(result_text)
+

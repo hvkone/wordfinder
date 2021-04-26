@@ -33,12 +33,13 @@ class UdpipeTrain(ITrain):
         try:
             self.store_data = StoreData(db_config['user'],
                                         db_config['password'],
-                                        db_host=db_config['db_host'],
-                                        db_name=db_config['db_name'])
+                                        db_config['host'],
+                                        db_config['database'])
             self.cursor = self.store_data.db_connect().cursor()
             # second loading udpipe pre-train model
             self.model = Model(self.pre_model_name)
             self._word_count, self.MAX_WORD_COUNT = 0, 500000
+            print('\n logging will start in database \n')
         except Exception as ex:
             print('logging in database error %s' % ex)
 
@@ -159,7 +160,24 @@ class UdpipeTrain(ITrain):
 
 def batch_train():
     for lang in language_list:
-        if lang in ['Chinese', 'English']:
+        if lang in [
+            'Chinese',
+            'Dutch',
+            'English',
+            'Finnish',
+            'French',
+            'German',
+            'Greek',
+            'Hungarian',
+            'Italian',
+            'Japanese',
+            'Korean',
+            'Latin',
+            'Polish',
+            'Portuguese',
+            'Russian',
+            'Spanish'
+        ]:
             continue
         udpipe_pre_model_path = udpipe_language[lang]
         corpus_filepath = corpus_language[lang]
@@ -171,19 +189,83 @@ def batch_train():
 
 if __name__ == '__main__':
     batch_train()
-    # parser = argparse.ArgumentParser(description='train corpus to get word, pos, and related sentence')
-    # parser.add_argument('-udfp', help='udpipe pre-model filepath')
-    # parser.add_argument('-cfp', help='corpus filepath for a specific language')
-    # args = parser.parse_args()
-    # if 'udfp' in args:
-    #     udpipe_pre_model_path = args.udfp
-    # else:
-    #     print('please input udpipe pre-model filepath')
-    # if 'cfp' in args:
-    #     corpus_filepath = args.cfp
-    # else:
-    #     print('please input corpus filepath')
-    #
-    # udt_english = UdpipeTrain(language_list[0], udpipe_pre_model_path, corpus_filepath)
-    # udt_english.do_train()
+    parser = argparse.ArgumentParser(description='train corpus to get word, pos, and related sentence')
+    parser.add_argument('-udfp', help='udpipe pre-model filepath')
+    parser.add_argument('-cfp', help='corpus filepath for a specific language')
+    args = parser.parse_args()
+    if 'udfp' in args:
+        udpipe_pre_model_path = args.udfp
+    else:
+        print('please input udpipe pre-model filepath')
+    if 'cfp' in args:
+        corpus_filepath = args.cfp
+    else:
+        print('please input corpus filepath')
+    # Italian
+    udt_chinese = UdpipeTrain(language_list[0], udpipe_pre_model_path, corpus_filepath)
+    udt_chinese.do_train()
+'''
+# Chinese
+udt_chinese = UdpipeTrain(language_list[0], udpipe_pre_model_path, corpus_filepath)
+udt_chinese.do_train()
 
+# Dutch
+udt_dutch = UdpipeTrain(language_list[1], udpipe_pre_model_path, corpus_filepath)
+udt_dutch.do_train()
+
+# English
+udt_english = UdpipeTrain(language_list[2], udpipe_pre_model_path, corpus_filepath)
+udt_english.do_train()
+
+# Finnish
+udt_finnish = UdpipeTrain(language_list[3], udpipe_pre_model_path, corpus_filepath)
+udt_finnish.do_train()
+
+# French
+udt_french = UdpipeTrain(language_list[4], udpipe_pre_model_path, corpus_filepath)
+udt_french.do_train()
+
+# German
+udt_german = UdpipeTrain(language_list[5], udpipe_pre_model_path, corpus_filepath)
+udt_german.do_train()
+
+# Greek
+udt_greek = UdpipeTrain(language_list[6], udpipe_pre_model_path, corpus_filepath)
+udt_greek.do_train()
+
+# Hungarian
+udt_hungarian = UdpipeTrain(language_list[7], udpipe_pre_model_path, corpus_filepath)
+udt_hungarian.do_train()
+
+# Italian
+udt_italian = UdpipeTrain(language_list[8], udpipe_pre_model_path, corpus_filepath)
+udt_italian.do_train()
+
+# Japanese
+udt_japanese = UdpipeTrain(language_list[9], udpipe_pre_model_path, corpus_filepath)
+udt_japanese.do_train()
+
+# Korean
+udt_korean = UdpipeTrain(language_list[10], udpipe_pre_model_path, corpus_filepath)
+udt_korean.do_train()
+
+# Latin
+udt_latin = UdpipeTrain(language_list[11], udpipe_pre_model_path, corpus_filepath)
+udt_latin.do_train()
+
+# Polish
+udt_polish = UdpipeTrain(language_list[12], udpipe_pre_model_path, corpus_filepath)
+udt_polish.do_train()
+
+# Portuguese
+udt_portuguese = UdpipeTrain(language_list[13], udpipe_pre_model_path, corpus_filepath)
+udt_portuguese.do_train()
+
+# Russian
+udt_russian = UdpipeTrain(language_list[14], udpipe_pre_model_path, corpus_filepath)
+udt_russian.do_train()
+
+# Spanish
+udt_spanish = UdpipeTrain(language_list[15], udpipe_pre_model_path, corpus_filepath)
+udt_spanish.do_train()
+'''

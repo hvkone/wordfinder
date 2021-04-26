@@ -6,6 +6,7 @@ function init(){
 }
 
 
+
 function findByTag(selWord, tag, rowResult, wordResultKWIC){
   /*
     selWord: selected word
@@ -14,12 +15,15 @@ function findByTag(selWord, tag, rowResult, wordResultKWIC){
 
   */
     $("#tagInput1").attr("value",tag);
+
     var ulControl = $('#sentencesGroup');
     ulControl.find("li").remove();
     if(wordResultKWIC.length > 0){
         $('#labelId1').show();
         $('#clusterDiv1').show();
     }
+  
+
     for(i=1; i<wordResultKWIC.length+1; i++){
       var wordIndex = wordResultKWIC[i-1].toLowerCase().indexOf(selWord.toLowerCase());
        var part1 = wordResultKWIC[i-1].slice(0,wordIndex)
@@ -29,6 +33,7 @@ function findByTag(selWord, tag, rowResult, wordResultKWIC){
                       + "<p>" + part1 + "<strong class=\"text-success\">" + part2 + "</strong>" + part3 + "</p>" +
                       "<span class=\"badge badge-primary badge-pill\">"+i+"</span>"+
                       "</li>";
+
         ulControl.append(ulcontent);
 
     }
