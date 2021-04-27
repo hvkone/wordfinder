@@ -5,10 +5,10 @@ true labels of clusters .
 date:4.2.2021
 """
 from sklearn import metrics
-from sklearn.metrics import pairwise_distances
 from sklearn.cluster import KMeans
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.cluster import DBSCAN
+import numpy as np
 
 
 class Evaluator(object):
@@ -56,6 +56,12 @@ class Evaluator(object):
         """
         higher value means better cluster result
         """
+        # only one cluster
+        if labels.min() == labels.max():
+            return 1.0
+        # cluster count equals to len of X
+        if len(np.unique(labels)) == len(self.X):
+            return 1.0
         return metrics.silhouette_score(self.X, labels, metric='euclidean')
 
     def nearer_zero_better_score(self, labels):

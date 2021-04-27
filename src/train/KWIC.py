@@ -31,6 +31,7 @@ def prettyPrintKWIC(kwic):
 
     return outstring
 
+
 def cut_to_sentence(text, keyword, keywordindex):
     """ Cuts the sentence around a keyword out of the text
     Arguments
@@ -130,6 +131,7 @@ def find_nth_occurrence(text, searchstr, nth=1, startindex=0):
 
     return start
 
+
 def rfind_nth_occurrence(text, searchstr, nth=1, endindex=None):
     """
     Finds the index of the nth occurence of a searchstr in the text going
@@ -151,6 +153,7 @@ def rfind_nth_occurrence(text, searchstr, nth=1, endindex=None):
             end = rfind_index
 
     return end
+
 
 def keywords_in_context(text, keywords, max_words=5, sep="...", cut_sentences=True):
     """ Returns the relevant context around keywords in a larger text.
@@ -215,6 +218,7 @@ def keywords_in_context(text, keywords, max_words=5, sep="...", cut_sentences=Tr
 
     return result
 
+
 def find_and_replace(text, find_str, replacement_str):
     """ Find and replace a find_str with a replacement_str in text. """
     start = text.find(find_str)
@@ -237,9 +241,11 @@ if __name__ == "__main__":
     Text = Sentence which needs to be shrinked
     Keyword = Searched word
     """
+
     result_text = keywords_in_context(TEXT, KEYWORDS)
     # Highlight Keywords
     for k in KEYWORDS:
         result_text = find_and_replace(result_text, k, "\x1b[34m"+k+"\x1b[0m")
 
     print(result_text)
+

@@ -14,10 +14,17 @@ import pymysql
 
 from src.train.result_model import TResult
 from src.train.store import StoreData
-from src.util import *
+from src.util import (language_dict,
+                      language_list,
+                      db_config,
+                      corpus_language,
+                      udpipe_language,
+                      get_keyword_window)
 from src.train.train_cluster import load_model
 from src.train.train_model import UdpipeTrain
 from src.train.cluster import Evaluator
+import re
+from src.train.KWIC import keywords_in_context, find_and_replace
 
 try:
     store_data = StoreData(db_config['user'],
@@ -111,14 +118,14 @@ class AppService(object):
         n_clusters = int(n_clusters)
         if n_clusters <= 0:
             print("Parameter is Invalid")
-            return
+            return [None]*4
         if n_clusters > len(sentences):
             # TODO add log
             print('number of cluster bigger than sentences count')
-            return
+            return [None]*4
         if len(self.sel_result) <= 0:
             print('no sentence')
-            return
+            return [None]*4
         # first loading model
         # first loading udpipemodel
         word2vec_model = load_model(save_path)
@@ -178,7 +185,31 @@ class AppService(object):
         if no_n_input:
             examples = recommend_sentences
 
-        return examples, recommend_sentences
+        return examples, recommend_sentences, sentences, best_labels
+
+    def kwic(self, selword: str, sentence_with_pos: list):
+        """
+        :param: selword
+        :param: sentenceWithPOS
+
+        sentence_with_pos examples:
+        [("NOUN", "bank", ["I go to the bank", "The house lies the right of the river bank"]),
+        ("VERB", "bank", ["I banked in a slot"])
+        """
+        # This is similar to sentenceWithPOS but processed after KWIC
+        result = []
+        for sentTuple in sentence_with_pos:
+            sents_kwic = []
+            result.append((sentTuple[0], sentTuple[1], sentTuple[2], sents_kwic))
+
+            sents_origin = sentTuple[2]
+            for sent in sents_origin:
+                result_text = keywords_in_context(sent, [selword])
+                # Highlight Keywords
+                # result_text = find_and_replace(result_text, selword, "\x1b[34m" + selword + "\x1b[0m")
+                sents_kwic.append(result_text)
+
+        return result
 
     def _get_examples(self, sentences: List[str], best_labels, n_clusters: int):
         tmp_labels, examples = [], []
@@ -196,6 +227,12 @@ class AppService(object):
                 if len(examples) >= n_clusters:
                     break
         return examples
+
+
+class AppContext(object):
+    sel_language = None
+    sel_word = None
+    sel_result_kwic = None
 
 
 if __name__ == "__main__":
