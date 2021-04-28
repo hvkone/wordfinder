@@ -1,10 +1,11 @@
 requests==2.25.1
 nltk==3.5
-numpy==1.20.1
+numpy~=1.19.2
 beautifulsoup4==4.9.3
 corpy==0.3.0
 Flask==1.1.2
 gensim==3.8.3
 pymysql==1.0.2
-scikit_learn==0.24.1
 pysolr-3.9.0
+mysql~=5.7.24
+scikit-learn~=0.24.1
