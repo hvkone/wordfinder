@@ -6,7 +6,6 @@ corpy==0.3.0
 Flask==1.1.2
 gensim==3.8.3
 pymysql==1.0.2
-scikit_learn==0.24.1
 pysolr-3.9.0
 mysql~=5.7.24
 scikit-learn~=0.24.1

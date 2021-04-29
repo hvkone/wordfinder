@@ -51,7 +51,7 @@ class StoreData(object):
                                            host=self.DB_HOST)
         except pymysql.connect.Error as err:
             print(err)
-        print('connection succeed!')
+        print('\n connection success! \n')
         return self.cnx
 
     def create_database(self, cursor):
@@ -65,9 +65,9 @@ class StoreData(object):
                 self.DB_NAME = db_config['db_name']
             cursor.execute(
                 "CREATE DATABASE IF NOT EXISTS {} DEFAULT CHARACTER SET 'utf8'".format(self.DB_NAME))
-            print('database %s creation succeed' % self.DB_NAME)
+            print('\n database %s creation successful \n' % self.DB_NAME)
         except pymysql.connect.Error as err:
-            print("Failed creating database: {}".format(err))
+            print("\n Failed creating database: {} \n".format(err))
             exit(1)
 
     def create_tables(self, cursor, tables: dict, tables_sentences: dict):
@@ -179,6 +179,7 @@ if __name__ == '__main__':
                            db_config['db_name']
                            )
     conn = store_data.db_connect()
-    # store_data.create_database(conn.cursor())
-    # store_data.create_tables(conn.cursor(), TABLES, TABLES_SENTENCES)
-    print('Done succeed~')
+
+    store_data.create_database(conn.cursor())
+    store_data.create_tables(conn.cursor(), TABLES, TABLES_SENTENCES)
+    print('TABLES CREATED: SUCCESS')

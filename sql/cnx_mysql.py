@@ -21,10 +21,12 @@ try:
     if conn:
         print("\n Database psd_project was located. \n \n List of tables in psd_project \n")
         with conn.cursor() as cursor:
+
             cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'psd_project'")
+
             print(cursor.fetchall())
-    
-        
+
+
 except mysql.connector.Error as err:
     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
         print("Something is wrong with the user name or password")

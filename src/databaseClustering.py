@@ -8,6 +8,7 @@ import numpy as np
 from sklearn.cluster import KMeans
 from nltk.tokenize import word_tokenize
 import string
+from util import db_config
 
 
 def train_model(language_name, corpus_path, save_path):
@@ -33,21 +34,35 @@ def load_model(save_path) -> gensim.models.Word2Vec:
     return model
 
 
-def database():
-    db = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='root',
-        database='psd_project'
-    )
-    mycursor = db.cursor()
-    query_info = ("SELECT sentence FROM english_sentences")
-    mycursor.execute(query_info)
-    sentences_df = pd.DataFrame(mycursor.fetchall(), columns=['Sentences'])
+# def database():
+#    db = mysql.connector.connect(
+#        host='localhost',
+#        user='root',
+#        password='root',
+#        database='psd_project'
+#    )
+#    mycursor = db.cursor()
+#    query_info = ("SELECT sentence FROM english_sentences")
+#    mycursor.execute(query_info)
+#    sentences_df = pd.DataFrame(mycursor.fetchall(), columns=['Sentences'])
 
-    return sentences_df
+#    return sentences_df
 
+#either 37- 48 lines code or 52-63 code needed to be there
+	db = mysql.connector.connect(
+		host=db_config['host'],
+		user=db_config['user'],
+		password=db_config['password'],
+		database=db_config['database']
+		)
+	mycursor = db.cursor()
+	query_info = ("SELECT sentence FROM english_sentences")
+	mycursor.execute(query_info)
+	sentences_df= pd.DataFrame(mycursor.fetchall(), columns=['Sentences'])
 
+	return sentences_df
+	
+  
 def textProcessing(text):
     no_stop = [words for words in text.split() if words.lower() not in string.punctuation]
     return no_stop
@@ -102,21 +117,25 @@ def cluster_sentences(language_name: str, save_path: str, sentences: List[str], 
 
 
 a = database()
-file_path = r'C:\Users\haris\Desktop\wordFinder\word2vec'
-file_path = file_path + 'English'
+
+# file_path = r'C:\Users\haris\Desktop\wordFinder\word2vec'
+# file_path = file_path + 'English'
+
+file_path = './corpus/word2vecmodel/'
+language_name = 'english'
+file_path = file_path + language_name
 load_model(file_path)
 print('All done')
 
 c = a['Sentences'].apply(textProcessing)
 
 # get word vector for one sentence
-language_name = 'English'
 sentences = [
     'Tohru shows great loyalty to whoever he stands by, even back to the time when he was an Enforcer for the Dark Hand.',
     'The Earth Demon, Dai Gui resembles a large minotaur(with the face of a guardian lion) with great strength.',
     'Al Mulock was the great-grandson of Sir William Mulock(1843–1944), the former Canadian Postmaster - General.',
     'Though his surviving images are scarce, his importance to the early history of photography in Asia is great.']
 
-cluster_result = cluster_sentences(language_name, file_path, c, 3)
+cluster_result = cluster_sentences(language_name, file_path,c,3)
 print("two examples sentences: \n")
 print(cluster_result)
