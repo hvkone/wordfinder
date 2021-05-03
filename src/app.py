@@ -8,7 +8,6 @@ from src.util import language_dict, language_list, db_config, word2vec_language
 from src.service import AppService
 from flask import Flask, render_template, request, redirect, url_for, flash
 
-
 app = Flask(__name__)
 
 # TODO: need to change with the selection different language
@@ -43,7 +42,6 @@ def find():
                                                       "sel_word": sel_word,
                                                       "sel_result": appService.sel_result})
 
-
 @app.route('/find2', methods=['POST'])
 def find2():
     language_name, sel_word = None, None
@@ -56,7 +54,6 @@ def find2():
     return render_template('result.html', input_data={"language_name": language_name,
                                                       "sel_word": sel_word,
                                                       "sel_result": appService.sel_result})
-
 
 @app.route('/cluster', methods=['POST'])
 def cluster():
