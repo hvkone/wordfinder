@@ -128,9 +128,9 @@ if __name__ == "__main__":
         print('please input word vector filepath')
 
     # first loading udpipe to segement word for each sentence
-    udt_english = UdpipeTrain(languange_name, udpipe_pre_model_path, corpus_filepath)
+    udt_english = UdpipeTrain(language_name, udpipe_pre_model_path, corpus_filepath)
     # second train to get the word2vec udpipemodel
-    train_model(languange_name, corpus_filepath, file_path, udt_english)
+    train_model(language_name, corpus_filepath, file_path, udt_english)
     # finally, after train we can load udpipemodel to use directly
     load_model(file_path)
     print('All done')
@@ -140,11 +140,12 @@ if __name__ == "__main__":
     # udt_lang = UdpipeTrain(lang, udpipe_pre_model_path, corpus_filepath)
     # second train to get the word2vec model
     # word2vec_result_file = 'corpus//word2vecmodel//gensim-word2vec-model-'
+    # word2vec_result_file = 'input//word2vecmodel//gensim-word2vec-model-'
     # train_model(lang, corpus_filepath, word2vec_result_file, udt_lang)
 
 
-if __name__ == "__main__":
-    batch()
+#if __name__ == "__main__":
+    #batch()
     # languange_name = 'English'
     #
     # # input example
@@ -172,11 +173,5 @@ if __name__ == "__main__":
     #     file_path = args.wvfp
     # else:
     #     print('please input word vector filepath')
-    #
-    # # first loading udpipe to segement word for each sentence
-    # udt_english = UdpipeTrain(languange_name, udpipe_pre_model_path, corpus_filepath)
-    # # second train to get the word2vec model
-    # train_model(languange_name, corpus_filepath, file_path, udpipe_pre_model_path)
-    # # finally, after train we can load model to use directly
-    # # load_model(file_path)
-    # print('All done')
+
+

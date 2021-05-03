@@ -8,12 +8,10 @@ from src.util import language_dict, language_list, db_config, word2vec_language
 from src.service import AppService
 from flask import Flask, render_template, request, redirect, url_for, flash
 
-
 app = Flask(__name__)
 
 # TODO: need to change with the selection different language
 appService = AppService()
-
 
 @app.route('/')
 def index():
@@ -22,7 +20,6 @@ def index():
     :return:index.html
     """
     return render_template('index.html')
-
 
 @app.route('/find', methods=['POST'])
 def find():
@@ -45,7 +42,6 @@ def find():
                                                       "sel_word": sel_word,
                                                       "sel_result": appService.sel_result})
 
-
 @app.route('/find2', methods=['POST'])
 def find2():
     language_name, sel_word = None, None
@@ -58,7 +54,6 @@ def find2():
     return render_template('result.html', input_data={"language_name": language_name,
                                                       "sel_word": sel_word,
                                                       "sel_result": appService.sel_result})
-
 
 @app.route('/cluster', methods=['POST'])
 def cluster():
@@ -76,13 +71,8 @@ def cluster():
         if not appService.udt_pre_model:
             appService.config_udpipe(language_name)
         cluster_model_file = word2vec_language[language_name]
-        cluster_result, rec_cluster_result = appService.cluster_sentences(
-            language_name, cluster_model_file, cluster_input_sentence, cluster_number)
-        return render_template('cluster.html',
-                               cluster_number=cluster_number,
-                               cluster_result=cluster_result,
-                               rec_cluster_result=rec_cluster_result)
-
+        cluster_result, rec_cluster_result = appService.cluster_sentences(language_name, cluster_model_file,cluster_input_sentence, cluster_number)
+        return render_template('cluster.html',cluster_number=cluster_number,cluster_result=cluster_result,rec_cluster_result=rec_cluster_result)
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
