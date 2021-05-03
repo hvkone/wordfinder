@@ -231,7 +231,6 @@ def find_and_replace(text, find_str, replacement_str):
 
     return text
 
-
 if __name__ == "__main__":
     """
     Text = Sentence which needs to be shrinked
