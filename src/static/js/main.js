@@ -69,8 +69,11 @@ function findByTag(selWord, tag, rowResult, wordResultKWIC){
 
     outstr = '<pre>'
     for(i=1; i<wordResultKWIC.length+1; i++){
-        outstr += wordResultKWIC[i-1]
-        outstr += '<br />'
+         outstr += "<li class=\"list-group-item d-flex justify-content-between align-items-center\">" +
+           wordResultKWIC[i-1] +
+           "<span class=\"badge badge-primary badge-pill\">"+ i + "</span>" +
+          "</li>"
+        //outstr += '<br />'
     }
 
     outstr += '</pre>'

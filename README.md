@@ -265,3 +265,16 @@ Update features:
    Chinese
 
 6.  there are bugs of cluster function
+
+
+
+### deploy
+
+Needed to install:
+
+```py
+sudo apt-get install libmysqlclient-dev
+```
+
+then install requirements.txt
+

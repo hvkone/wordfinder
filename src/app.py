@@ -1,3 +1,9 @@
+import os
+import sys
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+sys.path.append(rootPath)
+
 from typing import Any
 from collections import defaultdict
 import json
@@ -7,6 +13,7 @@ from src.train.store import StoreData
 from src.util import language_dict, language_list, db_config, word2vec_language
 from src.service import AppService, AppContext
 from flask import Flask, render_template, request, redirect, url_for, flash
+
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -104,4 +111,4 @@ def cluster():
 
 
 if __name__ == '__main__':
-    app.run(port=3000, debug=True)
+    app.run(port=3001, debug=True)
