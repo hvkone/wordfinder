@@ -4,7 +4,6 @@ def getNGrams(wordlist, n):
 # Given a list of n-grams, return a dictionary of KWICs,
 # indexed by keyword.
 
-
 def nGramsToKWICDict(ngrams):
     keyindex = len(ngrams[0]) // 2
 
@@ -112,7 +111,6 @@ def cut_to_sentence(text, keyword, keywordindex):
         end = min(find_results_bigger_neg_1) + 1
 
     return list(range(start, end)), text[start:end]
-
 
 def find_nth_occurrence(text, searchstr, nth=1, startindex=0):
     """
@@ -269,3 +267,11 @@ if __name__ == "__main__":
         for k in KEYWORDS:
             result_text = find_and_replace(result_text, k, k)
             print(result_text)
+
+    result_text = keywords_in_context(TEXT, KEYWORDS)
+    # Highlight Keywords
+    for k in KEYWORDS:
+        result_text = find_and_replace(result_text, k, "\x1b[34m"+k+"\x1b[0m")
+
+    print(result_text)
+

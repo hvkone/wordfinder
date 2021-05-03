@@ -129,15 +129,16 @@ HERE we make development plans, dicuss them and pass them. Then we should follow
 
 2/16/2021 - 2/21/2021 TASKS
 
-Sprint 1
+# sprint 1: planning
+
 1. Develop UI in any language 
 2. Obtain Corpus 
 3. Clean the Corpus(Tokenization, lemmatization and stemming)
 4. Tag the data according the POS
 
 
-
-Sprint 2
+### -------------------------------------------------
+# sprint 2: planning
 
 Discussion list:
 
@@ -154,7 +155,6 @@ Discussion list:
 ![big task steps](assets/big-task-1.png)
 
 
-
 ### Done list:
  User interface
  English corpora
@@ -167,12 +167,12 @@ Discussion list:
 
 ### mysql
 
-# view all tables of a database, here called mysql database
+### view all tables of a database, here called mysql database
 
 select table_name from information_schema.tables where table_schema='mysql';
 
 
-### sprint 2: review
+# sprint 2: review
 
 new features:
 
@@ -191,8 +191,8 @@ unfinished features:
 1. corpus for many other languages
 2. cluster 
 
-
-Sprint #3 planning
+### -------------------------------------------------
+# sprint 3: planning
 - 1 methods to get corpus for many languages
     - 1.1 wikipedia : language abbreviation: https://zh.wikipedia.org/wiki/ISO_639-1
     - 1.2 how to get via wikipedia https://jdhao.github.io/2019/01/10/two_chinese_corpus/
@@ -266,15 +266,34 @@ Update features:
 
 6.  there are bugs of cluster function
 
+### -------------------------------------------------
+# sprint 4: planning
 
+review codes we have pushed to the base github repo @all
+with models we had train more languages, train_model. py to database, cluster_model. py to get word2vec model(it doesn't need to store database so everyone can do it)@all
+test every py module and welcome to commit bugs we everyone find @all
+with logging module add logs before and after important events @all
+Time complexity for this task is a needed issue for us to consider.
 
-### deploy
+1. DATABASE
+    1. create accesible db for everyone
+        - Will have to change util.py to connect to new db
+    2. check the ouput for application
+    3. Also we need to train more languages.
+    4. Add more text files
 
-Needed to install:
+2. KWIC
+    1. we should highlight the selected word in each sentence 
+    2. Check the length of words on each side of selected word
+    3. sentence by sentence
 
-```py
-sudo apt-get install libmysqlclient-dev
-```
-
-then install requirements.txt
+3. CLUSTERING
+    1. We should adjust our cluster algorithms
+    2. Apply various algorithms to our cluster_model.py.
+    3. Cluster after user search word
+        - For example, if we select the word excellent, then find a sentence such as: He was an excellent journalist and a very fine man, after the cluster, we expect to get the sentence like he is a very good man.
+    5. Also need to set a default k value...
+        - Elbow Method 
+        - will try to determine default k based on length of characters in selected 
+    6. Evaluate quality of cluster
 
