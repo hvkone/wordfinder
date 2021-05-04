@@ -229,6 +229,7 @@ def find_and_replace(text, find_str, replacement_str):
 
         # replace (cut the original word out and insert the replacement)
         text = text[:start] + replacement_str + text[start+len(find_str):]
+        prettyPrintKWIC(text)
 
         offset = start + len(replacement_str)
         start = text[offset:].find(find_str)
@@ -236,11 +237,36 @@ def find_and_replace(text, find_str, replacement_str):
     return text
 
 
+def prettyPrintKWIC(kwic):
+    n = len(kwic)
+    keyindex = n // 2
+    width = 1
+
+    outstring = ' '.join(kwic[:keyindex]).rjust(width*keyindex)
+    outstring += str(kwic[keyindex]).center(len(kwic[keyindex])+6)
+    outstring += ' '.join(kwic[(keyindex+1):])
+    # print(outstring)
+    return outstring
+
+
 if __name__ == "__main__":
     """
     Text = Sentence which needs to be shrinked
     Keyword = Searched word
     """
+    TEXTs = [
+        'In 222 BC, the Romans besieged Acerrae, an Insubre fortification on the right bank of the River Adda between Cremona and Laus Pompeia (Lodi Vecchio).',
+        'A spokesman for the bank said "We will be compensating customers who did not receive full services from Affinion, and providing our apology."',
+        'One of the first fully functional direct banks in the United States was the Security First Network Bank (SFNB), which was launched in October 1995',
+        'At the same time, internet-only banks or "virtual banks" appeared.',
+        'Arriving at the Douro, Wellesley was unable to cross the river because Soult\'s army had either destroyed or moved all the boats to the northern bank.']
+    KEYWORDS = ['bank']
+    for TEXT in TEXTs:
+        result_text = keywords_in_context(TEXT, KEYWORDS, max_words=3, sep="")
+        # Highlight Keywords
+        for k in KEYWORDS:
+            result_text = find_and_replace(result_text, k, k)
+            print(result_text)
 
     result_text = keywords_in_context(TEXT, KEYWORDS)
     # Highlight Keywords
