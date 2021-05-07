@@ -297,3 +297,9 @@ Time complexity for this task is a needed issue for us to consider.
         - will try to determine default k based on length of characters in selected 
     6. Evaluate quality of cluster
 
+KWIC
+
+1. review codes we have pushed to the base github repo @all
+2. with models we had train more languages, train_model. py to database, cluster_model. py to get word2vec model(it doesn't need to store database so everyone can do it)@all
+3. test every py module and welcome to commit bugs we everyone find @all
+4. with logging module add logs before and after important events @all
