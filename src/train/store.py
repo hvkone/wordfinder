@@ -175,10 +175,11 @@ if __name__ == '__main__':
     # put config info of database to db_config variable
     store_data = StoreData(db_config['user'],
                            db_config['password'],
-                           db_config['host'],
-                           db_config['database']
+                           db_config['db_host'],
+                           db_config['db_name']
                            )
     conn = store_data.db_connect()
+
     store_data.create_database(conn.cursor())
     store_data.create_tables(conn.cursor(), TABLES, TABLES_SENTENCES)
     print('TABLES CREATED: SUCCESS')

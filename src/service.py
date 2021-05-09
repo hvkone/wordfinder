@@ -80,7 +80,7 @@ class AppService(object):
                                     db_config['host'],
                                     db_config['database'])
         self.cursor = self.store_data.db_connect().cursor()
-        query_info = "SELECT sentence FROM english_sentences"
+        query_info = "SELECT sentence FROM English_sentences"
         self.cursor.execute(query_info)
         sentences_df = pd.DataFrame(self.cursor.fetchall(), columns=['Sentences'])
         return sentences_df
@@ -91,7 +91,7 @@ class AppService(object):
                                     db_config['host'],
                                     db_config['database'])
         self.cursor = self.store_data.db_connect().cursor()
-        query_info = "SELECT sentence FROM english_sentences"
+        query_info = "SELECT sentence FROM English_sentences"
         self.cursor.execute(query_info)
         sentences_dataframe = pd.DataFrame(self.cursor.fetchall(), columns=['Sentences'])
         return sentences_dataframe
@@ -130,7 +130,7 @@ class AppService(object):
             words = self.udt_pre_model.word_segmentation(sent)
             word_vectors = []
             # iterator to word
-            window_words = get_keyword_window(self.sel_result[0][0], words, 5)
+            window_words = get_keyword_window(self.sel_result[0][0], words, 10)
             for word in window_words:
                 if word in word2vec_model.wv:
                     word_vectors.append(word2vec_model.wv[word])
@@ -210,13 +210,18 @@ if __name__ == "__main__":
     ]
     save_path = './/corpus//english//'
     # first loading udpipe to segement word for each sentence
+    # udt_english = UdpipeTrain(language_list[1],
+    #                           r'C:\Users\haris\Desktop\wordFinder\english-ewt-ud-2.5-191206.udpipe',
+    #                           r'C:\Users\haris\Desktop\wordFinder\haris.txt')
+
    
     udt_english = UdpipeTrain(language_list[1],
                               r'.//corpus//udpipemodel//english.udpipe',
                               r'.//corpus//english//135-0.txt')
     
-    cluster_result = AppService().config_udpipe(language_name).cluster_sentences(language_name, save_path, sentences='3', n_clusters=2)
-    '''
+    #cluster_result = AppService().config_udpipe(language_name).cluster_sentences(language_name, save_path, sentences='3', n_clusters=2)
+    # '''
+
     cluster_result = AppService().config_udpipe(language_name).cluster_sentences(language_name, sentences, 2)
     print("two examples sentences: \n")
     print(cluster_result)
