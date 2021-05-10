@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\test",
+    "\\src\\train"
+  ],
+  "SelectedNode": "\\src\\train\\store.py",
+  "PreviewInSolutionExplorer": false
+}
