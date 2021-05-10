@@ -14,8 +14,8 @@ language_dict = {'1': 'Chinese', '2': 'English', '3': 'French', '4': 'Italian',
 # database config
 # cofig for local database
 db_config = {'user': 'root',
-             'password': 'root@123',
-             'db_host': 'localhost',
+             'password': 'LhxGz102231',
+             'db_host': '192.144.171.233',
              'db_name': 'psd_project'}
 
 # language and corresponding file path of corpus
