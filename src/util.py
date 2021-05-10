@@ -13,10 +13,15 @@ language_dict = {'1': 'Chinese', '2': 'English', '3': 'French', '4': 'Italian',
 
 # database config
 # cofig for local database
-db_config = {'user': 'root',
-             'password': 'LhxGz102231',
-             'db_host': '192.144.171.233',
-             'db_name': 'psd_project'}
+db_config = {
+    'host': 'psd-wordfinder.mysql.database.azure.com',
+    'database': 'psd_project',
+    'user': 'adminteam@psd-wordfinder',
+    'password': 'jFq&T7bPJXmY',
+    #'client_flags': [mysql.connector.ClientFlag.SSL],
+    #'ssl_ca': './/src//train//DigiCertGlobalRootG2.crt.pem' #vscode
+    'ssl_ca': 'DigiCertGlobalRootG2.crt.pem' #pycharm
+}
 
 # language and corresponding file path of corpus
 corpus_language = {'Chinese': 'input//corpus//result//zh.txt',
