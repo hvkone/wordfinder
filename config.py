@@ -36,7 +36,7 @@ db_config = {
     'password': 'jFq&T7bPJXmY',
     #'client_flags': [mysql.connector.ClientFlag.SSL],
     #'ssl_ca': './/src//train//DigiCertGlobalRootG2.crt.pem' #vscode
-    'ssl_ca': 'DigiCertGlobalRootG2.crt.pem' #pycharm
+    #'ssl_ca': 'DigiCertGlobalRootG2.crt.pem' #pycharm
 }
 
 root_path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
