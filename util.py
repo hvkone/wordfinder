@@ -12,7 +12,6 @@ language_dict = {'1': 'Chinese', '2': 'English', '3': 'French', '4': 'Italian',
                  '5': 'Spanish', '6': 'Korean', '7': 'Russian', '8': 'Portuguese'}
 
 # database config
-# cofig for local database
 db_config = {
     'host': 'psd-wordfinder.mysql.database.azure.com',
     'database': 'psd_project',

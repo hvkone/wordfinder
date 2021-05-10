@@ -8,7 +8,7 @@
 import base64
 import os
 
-pwd = base64.b64decode(b'TGh4R3oxMDIyMzE=')
+#pwd = base64.b64decode(b'TGh4R3oxMDIyMzE=')
 
 language_list = ['Chinese',
                  'English',
@@ -29,10 +29,15 @@ language_dict = {'1': 'Chinese',
                  '8': 'Portuguese'}
 
 # database config, remote mysql
-db_config = {'user': 'root',
-             'password': pwd.decode("utf-8"),
-             'db_host': '192.144.171.233',
-             'db_name': 'psd_project'}
+db_config = {
+    'host': 'psd-wordfinder.mysql.database.azure.com',
+    'database': 'psd_project',
+    'user': 'adminteam@psd-wordfinder',
+    'password': 'jFq&T7bPJXmY',
+    #'client_flags': [mysql.connector.ClientFlag.SSL],
+    #'ssl_ca': './/src//train//DigiCertGlobalRootG2.crt.pem' #vscode
+    'ssl_ca': 'DigiCertGlobalRootG2.crt.pem' #pycharm
+}
 
 root_path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 # language and corresponding file path of corpus
