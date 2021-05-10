@@ -59,4 +59,4 @@ jobs:
         with:
           app-name: 'psdwordfinder'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_2ba08de139db4db096342fe629e41d65 }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_c49ad6237e6043298cc4cbf369d01250 }}
