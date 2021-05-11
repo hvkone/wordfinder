@@ -77,8 +77,8 @@ class AppService(object):
         try:
             store_data = StoreData(db_config['user'],
                                    db_config['password'],
-                                   db_host=db_config['db_host'],
-                                   db_name=db_config['db_name'])
+                                   db_host=db_config['host'],
+                                   db_name=db_config['database'])
             AppContext.db_conn = store_data.db_connect()
         except Exception as ex:
             log.error('database link error %s' % (ex,))
@@ -160,11 +160,12 @@ class AppService(object):
             # iterator to word
             # window_words = get_keyword_window(AppContext.sel_word, words, 5)
             window_words = get_keyword_window2(AppContext.sel_language, AppContext.sel_word, words, 5)
-            word_vectors = [word2vec_model.wv[word.lower()] for word in window_words if word.lower() in word2vec_model.wv]
+            word_vectors = [word2vec_model.wv[word.lower()] for word in window_words if
+                            word.lower() in word2vec_model.wv]
             to_array = np.array(word_vectors)
             if len(to_array) == 0:
                 failure_sentences.append(sent)
-                log.warning('vector of very word in sentence %s not found ' % (sent, ))
+                log.warning('vector of very word in sentence %s not found ' % (sent,))
                 continue
             sent_vectors.append(to_array.mean(axis=0).tolist())
         AppContext.cluster_sentences_succeed = [sent for sent in sentences if sent not in failure_sentences]
@@ -222,7 +223,8 @@ class AppService(object):
             sents_origin = sentTuple[2]
             for sent in sents_origin:
                 words = AppContext.udt_pre_model.word_segmentation(sent)
-                result_text, pre_kwic = kwic_show(AppContext.sel_language, words, sel_word, window_size=9, token_space_param=2)
+                result_text, pre_kwic = kwic_show(AppContext.sel_language, words, sel_word, window_size=9,
+                                                  token_space_param=2)
                 if result_text:
                     sents_kwic.append(result_text)
                     tmp_pre_kwic.append(pre_kwic)

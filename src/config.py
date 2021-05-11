@@ -55,14 +55,14 @@ corpus_language = {'Chinese': os.path.join(root_path, 'input//corpus//result//zh
                    'Russian': os.path.join(root_path, 'input//corpus//result//wiki_ru.txt'),
                    'Portuguese': os.path.join(root_path, 'input//corpus//result//wiki_pt.txt')}
 
-udpipe_language = {'Chinese': os.path.join(root_path, 'input//udpipemodel//chinese-gsdsimp-ud-2.5-191206.udpipe'),
-                   'English': os.path.join(root_path, 'input//udpipemodel//english-ewt-ud-2.5-191206.udpipe'),
-                   'French': os.path.join(root_path, 'input//udpipemodel//french-gsd-ud-2.5-191206.udpipe'),
-                   'Italian': os.path.join(root_path, 'input//udpipemodel//italian-isdt-ud-2.5-191206.udpipe'),
-                   'Spanish': os.path.join(root_path, 'input//udpipemodel//spanish-gsd-ud-2.5-191206.udpipe'),
-                   'Korean': os.path.join(root_path, 'input//udpipemodel//korean-gsd-ud-2.5-191206.udpipe'),
-                   'Russian': os.path.join(root_path, 'input//udpipemodel//russian-gsd-ud-2.5-191206.udpipe'),
-                   'Portuguese': os.path.join(root_path, 'input//udpipemodel//portuguese-gsd-ud-2.5-191206.udpipe')}
+udpipe_language = {'Chinese': os.path.join(root_path, 'input//udpipemodel//chinese.udpipe'),
+                   'English': os.path.join(root_path, 'input//udpipemodel//english.udpipe'),
+                   'French': os.path.join(root_path, 'input//udpipemodel//french.udpipe'),
+                   'Italian': os.path.join(root_path, 'input//udpipemodel//italian.udpipe'),
+                   'Spanish': os.path.join(root_path, 'input//udpipemodel//spanish.udpipe'),
+                   'Korean': os.path.join(root_path, 'input//udpipemodel//korean.udpipe'),
+                   'Russian': os.path.join(root_path, 'input//udpipemodel//russian.udpipe'),
+                   'Portuguese': os.path.join(root_path, 'input//udpipemodel//portuguese.udpipe')}
 
 word2vec_language = {'Chinese': os.path.join(root_path, 'input//word2vecmodel//gensim-word2vec-model-Chinese'),
                      'English': os.path.join(root_path, 'input//word2vecmodel//gensim-word2vec-model-English'),

@@ -39,8 +39,8 @@ class UdpipeTrain(ITrain):
             if db_conn is None:
                 self.store_data = StoreData(db_config['user'],
                                             db_config['password'],
-                                            db_host=db_config['db_host'],
-                                            db_name=db_config['db_name'])
+                                            db_host=db_config['host'],
+                                            db_name=db_config['database'])
                 self.cursor = self.store_data.db_connect().cursor()
             # second loading udpipe pre-feature model
             self.model = Model(self.pre_model_name)
