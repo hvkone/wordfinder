@@ -1,18 +1,19 @@
 from typing import Any
-
-from flask import Flask, render_template, request, redirect, url_for, flash
 from collections import defaultdict
 import json
 
 from src.train.result_model import TResult
 from src.train.store import StoreData
-from src.util import language_dict, language_list, db_config, cluster_model_file
-from src.service import AppService
+from src.util import language_dict, language_list, db_config, word2vec_language
+from src.service import AppService, AppContext
+from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 # TODO: need to change with the selection different language
-appService = AppService()
+app_service = AppService()
+app_context = AppContext
 
 
 @app.route('/')
@@ -40,12 +41,16 @@ def find():
         language_id = request.form['sellanguage']
         sel_word = request.form['selword']
         language_name = language_dict[language_id]
-        if not appService.udt_pre_model:
-            appService.config_udpipe(language_name)
-        appService.find_service(language_name, sel_word)
+        app_context.sel_word = sel_word
+        app_context.sel_language = language_name
+        if not app_service.udt_pre_model:
+            app_service.config_udpipe(language_name)
+        app_service.find_service(language_name, sel_word)
+        sel_result_kwic = app_service.kwic(sel_word, app_service.sel_result)
+        app_context.sel_result_kwic = sel_result_kwic
     return render_template('result.html', input_data={"language_name": language_name,
                                                       "sel_word": sel_word,
-                                                      "sel_result": appService.sel_result})
+                                                      "sel_result": sel_result_kwic})
 
 
 @app.route('/find2', methods=['POST'])
@@ -54,12 +59,16 @@ def find2():
     if request.method == 'POST':
         language_name = request.form['sellanguage']
         sel_word = request.form['selword']
-        if not appService.udt_pre_model:
-            appService.config_udpipe(language_name)
-        appService.find_service(language_name, sel_word)
+        app_context.sel_word = sel_word
+        app_context.sel_language = language_name
+        if not app_service.udt_pre_model:
+            app_service.config_udpipe(language_name)
+        app_service.find_service(language_name, sel_word)
+        sel_result_kwic = app_service.kwic(sel_word, app_service.sel_result)
+        app_context.sel_result_kwic = sel_result_kwic
     return render_template('result.html', input_data={"language_name": language_name,
                                                       "sel_word": sel_word,
-                                                      "sel_result": appService.sel_result})
+                                                      "sel_result": sel_result_kwic})
 
 
 @app.route('/cluster', methods=['POST'])
@@ -75,12 +84,23 @@ def cluster():
         language_name = request.form['languageName']
         cluster_number = request.form['clusterNumber']
         sel_tag = request.form['tagInput1']
-        cluster_input_sentence = appService.pos_dict[sel_tag]
-        if not appService.udt_pre_model:
-            appService.config_udpipe(language_name)
-        cluser_model_file = cluster_model_file[language_name]
-        cluster_result = appService.cluster_sentences(language_name, cluser_model_file, cluster_input_sentence, cluster_number)
-        return render_template('cluster.html', cluster_number=cluster_number, cluster_result=cluster_result)
+        # TODO: clicking the button of return previous page then clicking cluster button causes a bug
+        cluster_input_sentence = app_service.pos_dict[sel_tag]
+        if not app_service.udt_pre_model:
+            app_service.config_udpipe(language_name)
+        cluster_model_file = word2vec_language[language_name]
+        cluster_result, rec_cluster_result, sentences, best_labels = app_service.cluster_sentences(
+            language_name, cluster_model_file, cluster_input_sentence, cluster_number)
+        if not cluster_result:
+            flash("invalid input to cluster number")
+            return render_template('result.html', input_data={"language_name": language_name,
+                                                              "sel_word": app_context.sel_word,
+                                                              "sel_result": app_context.sel_result_kwic})
+        return render_template('cluster.html',
+                               cluster_number=cluster_number,
+                               cluster_result=cluster_result,
+                               rec_cluster_result=rec_cluster_result,
+                               sentences_with_labels=zip(sentences, best_labels))
 
 
 if __name__ == '__main__':

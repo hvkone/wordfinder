@@ -1,11 +1,55 @@
+boto==2.49.0
+boto3 @ file:///tmp/build/80754af9/boto3_1629142476879/work
+botocore @ file:///tmp/build/80754af9/botocore_1633531073272/work
+Bottleneck @ file:///tmp/build/80754af9/bottleneck_1607575130224/work
+brotlipy==0.7.0
+bz2file==0.98
+certifi==2021.10.8
+cffi @ file:///tmp/build/80754af9/cffi_1625814692085/work
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
 click==7.1.2
-Flask==1.1.2
-flask-mysqldb==0.2.0
-gunicorn==20.0.4
-itsdangerous==1.1.0
-Jinja2==2.11.2
-MarkupSafe==1.1.1
-mysql==0.0.2
-mysqlclient==2.0.1
-Werkzeug==1.0.1
-mysql-connector-python
+corpy==0.4.0
+cryptography @ file:///tmp/build/80754af9/cryptography_1635366129652/work
+cycler==0.11.0
+Cython @ file:///tmp/build/80754af9/cython_1618435158654/work
+Flask @ file:///tmp/build/80754af9/flask_1634118196080/work
+gensim @ file:///tmp/build/80754af9/gensim_1621558514262/work
+idna @ file:///tmp/build/80754af9/idna_1622654382723/work
+itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
+Jinja2 @ file:///tmp/build/80754af9/jinja2_1635780242639/work
+jmespath @ file:///Users/ktietz/demo/mc3/conda-bld/jmespath_1630583964805/work
+joblib @ file:///tmp/build/80754af9/joblib_1635411271373/work
+kiwisolver==1.3.2
+lazy==1.4
+lxml==4.6.4
+MarkupSafe @ file:///tmp/build/80754af9/markupsafe_1621523467000/work
+matplotlib==3.4.3
+mkl-fft==1.3.1
+mkl-random @ file:///tmp/build/80754af9/mkl_random_1626186066731/work
+mkl-service==2.4.0
+nltk==3.6.5
+numexpr @ file:///tmp/build/80754af9/numexpr_1618856529730/work
+numpy @ file:///tmp/build/80754af9/numpy_and_numpy_base_1634095651905/work
+pandas==1.3.4
+Pillow==8.4.0
+pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
+PyMySQL @ file:///tmp/build/80754af9/pymysql_1610482864615/work
+pyOpenSSL @ file:///tmp/build/80754af9/pyopenssl_1635333100036/work
+pyparsing==3.0.5
+PySocks @ file:///tmp/build/80754af9/pysocks_1605305812635/work
+python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
+pytz==2021.3
+regex @ file:///tmp/build/80754af9/regex_1628063347754/work
+requests @ file:///tmp/build/80754af9/requests_1629994808627/work
+s3transfer @ file:///tmp/build/80754af9/s3transfer_1626435152308/work
+scikit-learn @ file:///tmp/build/80754af9/scikit-learn_1635187048948/work
+scipy @ file:///tmp/build/80754af9/scipy_1630606796912/work
+six @ file:///tmp/build/80754af9/six_1623709665295/work
+smart-open==1.9.0
+threadpoolctl @ file:///Users/ktietz/demo/mc3/conda-bld/threadpoolctl_1629802263681/work
+tqdm @ file:///tmp/build/80754af9/tqdm_1635330843403/work
+ufal.morphodita==1.10.1.1
+ufal.udpipe==1.2.0.3
+urllib3==1.26.7
+Werkzeug @ file:///tmp/build/80754af9/werkzeug_1635505089296/work
+wordcloud==1.8.1

@@ -1,19 +1,28 @@
 # This module provides service functionality to app.py
 # working directory is src folder.
 
-from collections import defaultdict
 import json
-from typing import List
 import sys
 import os
+
+import pandas as pd
 import numpy as np
+from typing import List
 from sklearn.cluster import KMeans
+from collections import defaultdict
 
 from src.train.result_model import TResult
 from src.train.store import StoreData
-from src.util import language_dict, language_list, db_config
+from src.util import (language_dict,
+                      language_list,
+                      db_config,
+                      corpus_language,
+                      udpipe_language,
+                      get_keyword_window)
 from src.train.train_cluster import load_model
 from src.train.train_model import UdpipeTrain
+from src.train.cluster import Evaluator
+import re
 
 try:
     store_data = StoreData(db_config['user'],
@@ -36,11 +45,10 @@ class AppService(object):
 
     def config_udpipe(self, language_name):
         # first loading udpipe to segement word for each sentence
-        # TODO: once getting language_name, then to find the related udpipe and corpus
         # all these need to be at preprocessed level
         self.udt_pre_model = UdpipeTrain(language_name,
-                                         '/home/zglg/SLU/psd/pre-model/english-ewt-ud-2.5-191206.udpipe',
-                                         '/home/zglg/SLU/psd/corpus/english/wiki_en.txt')
+                                         udpipe_language[language_name],
+                                         corpus_language[language_name])
         return self
 
     def find_service(self, language_name: str, sel_word: str):
@@ -51,7 +59,9 @@ class AppService(object):
         :return: None
         """
         # select
-        sql_str = "select * from " + language_name + "_wordpos as w left join " + language_name + "_sentences as s on w.sentence = s.id where w.word = %s "
+        sql_str = "select * from " + language_name + "_wordpos as w left join " + language_name + "_sentences as s on " \
+                                                                                                  "w.sentence = s.id " \
+                                                                                                  "where w.word = %s "
         try:
             cursor.execute(sql_str, (sel_word,))
             self.sel_result = cursor.fetchall()
@@ -69,6 +79,28 @@ class AppService(object):
                 pos_sentences.append(row[SENTENCE_COLUMN_INDEX])
         self.sel_result = [(sel_word, k, self.pos_dict[k]) for k in self.pos_dict]
 
+    def database(self):
+        self.store_data = StoreData(db_config['user'],
+                                    db_config['password'],
+                                    db_host=db_config['db_host'],
+                                    db_name=db_config['db_name'])
+        self.cursor = self.store_data.db_connect().cursor()
+        query_info = "SELECT sentence FROM english_sentences"
+        self.cursor.execute(query_info)
+        sentences_df = pd.DataFrame(self.cursor.fetchall(), columns=['Sentences'])
+        return sentences_df
+
+    def clusteringData(self):
+        self.store_data = StoreData(db_config['user'],
+                                    db_config['password'],
+                                    db_host=db_config['db_host'],
+                                    db_name=db_config['db_name'])
+        self.cursor = self.store_data.db_connect().cursor()
+        query_info = "SELECT sentence FROM english_sentences"
+        self.cursor.execute(query_info)
+        sentences_dataframe = pd.DataFrame(self.cursor.fetchall(), columns=['Sentences'])
+        return sentences_dataframe
+
     def cluster_sentences(self, language_name: str, save_path: str, sentences: List[str], n_clusters: int) -> List[str]:
         """
         cluster sentences to get examples
@@ -78,11 +110,20 @@ class AppService(object):
         :param n_clusters:
         :return:
         """
+        no_n_input = False
+        if n_clusters == '':
+            n_clusters, no_n_input = 2, True
         n_clusters = int(n_clusters)
+        if n_clusters <= 0:
+            print("Parameter is Invalid")
+            return [None]*4
         if n_clusters > len(sentences):
             # TODO add log
             print('number of cluster bigger than sentences count')
-            return
+            return [None]*4
+        if len(self.sel_result) <= 0:
+            print('no sentence')
+            return [None]*4
         # first loading model
         word2vec_model = load_model(save_path)
         # second geting vectors for one sentence
@@ -93,21 +134,82 @@ class AppService(object):
             words = self.udt_pre_model.word_segmentation(sent)
             word_vectors = []
             # iterator to word
-            for word in words:
+            window_words = get_keyword_window(self.sel_result[0][0], words, 5)
+            for word in window_words:
                 if word in word2vec_model.wv:
                     word_vectors.append(word2vec_model.wv[word])
-                else:  # not in dict, fill 0
-                    word_vectors.append([0] * default_dimn)
+                # else:  # not in dict, fill 0
+                    # word_vectors.append([0] * default_dimn)
 
             to_array = np.array(word_vectors)
             sent_vectors.append(to_array.mean(axis=0).tolist())
 
         # third using kmeans to cluster
-        kmeans = KMeans(n_clusters=n_clusters, random_state=0).fit(sent_vectors)
-        labels = kmeans.labels_
+        best_score, best_labels = -1, None
+        evaluator = Evaluator(sent_vectors)
+        labels1 = evaluator.kmeans_strategy(n_clusters)
+        score1 = evaluator.higher_better_score(labels1)
+        labels2 = evaluator.agglomerative_strategy(n_clusters)
+        score2 = evaluator.higher_better_score(labels2)
+        if score1 < score2:
+            best_score = score2
+            best_labels = labels2
+            print('agglomerative is better than kmeans')
+        else:
+
+            best_score = score1
+            best_labels = labels1
+            print('kmeans is better than agglomerative')
+
+        labels3, n_clusters = evaluator.get_best_n_clusters()
+        score3 = evaluator.higher_better_score(labels3)
+        if best_score < score3:
+            best_labels, best_score = labels3, score3
+
+            best_score = score1
+            best_labels = labels1
+            print('kmeans is better than agglomerative')
+
         # fourth select one sentence with each label
+        examples = self._get_examples(sentences, best_labels, n_clusters)
+
+        labels3, recommend_clusters = evaluator.get_best_n_clusters()
+        score3 = evaluator.higher_better_score(labels3)
+        if best_score < score3:
+            print('recommend %d sentences' % (recommend_clusters, ))
+        recommend_sentences = self._get_examples(sentences, labels3, recommend_clusters)
+
+        if no_n_input:
+            examples = recommend_sentences
+
+        return examples, recommend_sentences, sentences, best_labels
+
+    def kwic(self, selword: str, sentence_with_pos: list):
+        """
+        :param: selword
+        :param: sentenceWithPOS
+
+        sentence_with_pos examples:
+        [("NOUN", "bank", ["I go to the bank", "The house lies the right of the river bank"]),
+        ("VERB", "bank", ["I banked in a slot"])
+        """
+        # This is similar to sentenceWithPOS but processed after KWIC
+        result = []
+        for sentTuple in sentence_with_pos:
+            sents_kwic = []
+            result.append((sentTuple[0], sentTuple[1], sentTuple[2], sents_kwic))
+
+            sents_origin = sentTuple[2]
+            for sent in sents_origin:
+                words = sent.split(" ")
+                words2 = get_keyword_window(selword, words, 9)
+                sents_kwic.append(" ".join(words2))
+
+        return result
+
+    def _get_examples(self, sentences: List[str], best_labels, n_clusters: int):
         tmp_labels, examples = [], []
-        for sent, label in zip(sentences, labels):
+        for sent, label in zip(sentences, best_labels):
             if label not in tmp_labels:
                 tmp_labels.append(label)
                 examples.append(sent)
@@ -120,8 +222,13 @@ class AppService(object):
                     examples.append(sent)
                 if len(examples) >= n_clusters:
                     break
-
         return examples
+
+
+class AppContext(object):
+    sel_language = None
+    sel_word = None
+    sel_result_kwic = None
 
 
 if __name__ == "__main__":
@@ -135,8 +242,8 @@ if __name__ == "__main__":
 
     # first loading udpipe to segement word for each sentence
     udt_english = UdpipeTrain(language_list[1],
-                              '/home/zglg/SLU/psd/pre-model/english-ewt-ud-2.5-191206.udpipe',
-                              '/home/zglg/SLU/psd/corpus/english/wiki_en.txt')
+                              r'C:\Users\haris\Desktop\wordFinder\english-ewt-ud-2.5-191206.udpipe',
+                              r'C:\Users\haris\Desktop\wordFinder\haris.txt')
 
     cluster_result = AppService().config_udpipe(language_name).cluster_sentences(language_name, sentences, 2)
     print("two examples sentences: \n")
